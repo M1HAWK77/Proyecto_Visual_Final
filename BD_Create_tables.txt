@@ -1,0 +1,60 @@
+Tablas
+
+
+CREATE TABLE `pvisual`.`usuarios` (`ced_usu` VARCHAR(10) NOT NULL , `mail_usu` VARCHAR(40) NOT NULL , `pw_usu` VARCHAR(20) NOT NULL , `nom1_usu` VARCHAR(20) NOT NULL , `nom2_usu` VARCHAR(20) NOT NULL , `ape1_usu` VARCHAR(20) NOT NULL , `ape2_usu` VARCHAR(20) NOT NULL , `dir_usu` VARCHAR(50) NOT NULL ,
+ `tipo_usu` VARCHAR(25) NOT NULL , `img_usu` MEDIUMBLOB NULL , PRIMARY KEY (`ced_usu`)) ENGINE = InnoDB;
+
+CREATE TABLE `pvisual`.`cursos` (`id_cur` VARCHAR(10) NOT NULL , `nom_cur` VARCHAR(20) NOT NULL , `desc_cur` VARCHAR(100) NOT NULL , 
+PRIMARY KEY (`id_cur`)) ENGINE = InnoDB
+
+-------------------------
+
+CREATE TABLE asignaturas 
+(id_cur_per VARCHAR(10) REFERENCES cursos (id_cur));
+
+ALTER TABLE `asignaturas` ADD `id_asig` INT NOT NULL AUTO_INCREMENT AFTER `id_cur_per`,
+ADD `nom_asig` VARCHAR(30) NOT NULL AFTER `id_asig`, ADD PRIMARY KEY (`id_asig`);
+-------------------------
+
+CREATE TABLE `pvisual`.`actividades` (`id_act` INT NOT NULL AUTO_INCREMENT , `nom_act` VARCHAR(40) NOT NULL , `desc_act` VARCHAR(100) NULL ,
+`instruccion_act` MEDIUMBLOB NULL , `fec_entrega_act` DATE NOT NULL , `estado_act` VARCHAR(10) NOT NULL , `id_asig_per` INT NOT NULL , PRIMARY KEY (`id_act`)) ENGINE = InnoDB;
+
+
+ALTER TABLE `actividades` ADD FOREIGN KEY (`id_asig_per`) REFERENCES `asignaturas`(`id_asig`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+-------------------------
+
+CREATE TABLE `pvisual`.`detalle_asignaturas` (`id_det_asig` INT NOT NULL AUTO_INCREMENT ,
+ `ced_usu_det` VARCHAR(10) NOT NULL , `id_asi_det` INT NOT NULL , PRIMARY KEY (`id_det_asig`)) ENGINE = InnoDB;
+
+
+
+ALTER TABLE `detalle_asignaturas` ADD FOREIGN KEY (`ced_usu_det`) REFERENCES `usuarios`(`ced_usu`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `detalle_asignaturas` ADD FOREIGN KEY (`id_asi_det`) REFERENCES `asignaturas`(`id_asig`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+
+CREATE TABLE `pvisual`.`detalle_actividades` (`id_det_act` INT NOT NULL AUTO_INCREMENT , `id_usu_act` VARCHAR(10) NOT NULL , `calificacion` FLOAT NULL ,
+ `id_act_deta` INT NOT NULL , `archivo_act` MEDIUMBLOB NULL , PRIMARY KEY (`id_det_act`)) ENGINE = InnoDB;
+
+
+
+ALTER TABLE `detalle_actividades` ADD FOREIGN KEY (`id_usu_act`) REFERENCES `usuarios`(`ced_usu`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
+ALTER TABLE `detalle_actividades` ADD FOREIGN KEY (`id_act_deta`) REFERENCES `actividades`(`id_act`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

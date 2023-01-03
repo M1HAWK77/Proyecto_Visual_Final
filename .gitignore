@@ -17,6 +17,15 @@ nbproject/private
 
 # Node / Bower
 node_modules/
+#ignorar carpetas hecho por Ariel
+.github
+build
+dist
+docs
+pages
+plugins
+
+
 bower_components/
 # Plugins
 /plugins/**/*.html
