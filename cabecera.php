@@ -163,7 +163,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./panel.php" class="nav-link active">
+                <a href="./panel.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>HOME</p>
                 </a>
