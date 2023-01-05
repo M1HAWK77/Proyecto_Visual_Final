@@ -31,7 +31,7 @@
         }, function(data, status){
               alert("valor: "+data+" estado: "+status+userMail+userPw);
               if (data >= 1){
-                window.open("panel.php")
+                window.open("panel.php");
               }
            })
       });

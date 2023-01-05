@@ -14,10 +14,12 @@ if (isset($_POST['mail'])) {
     $con = conectar();
     $sentence = $con->prepare("SELECT * FROM usuarios WHERE mail_usu=? AND pw_usu=?");
     $sentence->execute(array($_POST['mail'], $_POST['pw']));
-    // $obtainData = $sentence->fetchAll();
+    $obtainData = $sentence->fetchAll();
     $result = $sentence->rowCount();
-
-    // $role = $obtainData['tipo_usu'];
-    // echo $result, $role;
+    $role = $obtainData[8];
+    var_dump($role);
+    // if ($result >= 1) {
+        //     $_SESSION=
+        // }
     echo $result;
 }
