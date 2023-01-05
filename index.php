@@ -1,3 +1,25 @@
+<?php
+session_start();
+if(!isset($_SESSION['user']) || !isset($_SESSION['rol'])){
+    echo("no existe");
+    $_SESSION['user'] = '';
+    $_SESSION['rol'] = '';
+     header("location:index.php");
+}else{
+    if($_SESSION['rol'] == ''){
+        header("location:index.php");
+    }else{
+        echo("existe el usuario " .$_SESSION['user']. " y se ha definido como " . $_SESSION['rol']);
+        if ($_SESSION['rol'] == 'admin') {
+            header('location: admin.php');
+        }
+    }
+
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +45,7 @@
         alert("Click en sing in");
         var userMail= $("#emailUser").val();
         var userPw= $("#passwordUser").val();
+        var roleUser = (<?php echo json_encode($_SESSION['rol']); ?>);//guuardar la variable en jquery con variables de sesion
 
         $.post("validaciones.php", {
           mail: userMail,
@@ -30,8 +53,9 @@
           
         }, function(data, status){
               alert("valor: "+data+" estado: "+status+userMail+userPw);
-              if (data >= 1){
-                window.open("panel.php");
+              if (data >= 1 && roleUser=='admin' ){
+                alert('entro al if'+ roleUser);
+                window.open("admin.php");
               }
            })
       });

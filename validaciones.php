@@ -1,6 +1,21 @@
 <?php
 include_once("conectarBD.php");
 
+if(!isset($_SESSION)) 
+    { 
+        
+        session_start(); 
+        if(!isset($_SESSION['rol'])){
+            // header("location:index.php");
+        }
+    }
+    else
+    {
+        session_destroy();
+        session_start(); 
+    }
+    echo("existe el usuario " .$_SESSION['user']. " y se ha definido como " . $_SESSION['rol']);
+
 // if (isset($_POST['mail'])) {
 //     $con = conectar();
 //     $sentence = $con->prepare("SELECT COUNT(*)cantidad FROM usuarios WHERE mail_usu=? AND pw_usu=?");
@@ -14,12 +29,11 @@ if (isset($_POST['mail'])) {
     $con = conectar();
     $sentence = $con->prepare("SELECT * FROM usuarios WHERE mail_usu=? AND pw_usu=?");
     $sentence->execute(array($_POST['mail'], $_POST['pw']));
-    $obtainData = $sentence->fetchAll();
+    $obtainData = $sentence->fetch();
     $result = $sentence->rowCount();
-    $role = $obtainData[8];
-    var_dump($role);
-    // if ($result >= 1) {
-        //     $_SESSION=
-        // }
+    if ($result >= 1) {
+        $_SESSION['user'] = $obtainData['nom1_usu'];
+        $_SESSION['rol'] = $obtainData['tipo_usu'];
+        }
     echo $result;
 }

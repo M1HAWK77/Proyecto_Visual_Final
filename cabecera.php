@@ -105,14 +105,14 @@
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fas fa-file mr-2"></i>
+          <i class="fas fa-times"></i>
           <span class="badge badge-danger navbar-badge"></span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="#" class="dropdown-item">
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">Log out</a>
+          <button type="submit" class="btn btn-default">Log out</button>
         </div>
       </li>
     </ul>
