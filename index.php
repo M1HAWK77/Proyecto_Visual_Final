@@ -4,10 +4,10 @@ if(!isset($_SESSION['user']) || !isset($_SESSION['rol'])){
     echo("no existe");
     $_SESSION['user'] = '';
     $_SESSION['rol'] = '';
-     header("location:index.php");
+    header("location:index.php");
 }else{
     if($_SESSION['rol'] == ''){
-        header("location:index.php");
+        // header("location:index.php"); me da problemas y me muestra que la pagina no esta disponible
     }else{
         echo("existe el usuario " .$_SESSION['user']. " y se ha definido como " . $_SESSION['rol']);
         if ($_SESSION['rol'] == 'admin') {

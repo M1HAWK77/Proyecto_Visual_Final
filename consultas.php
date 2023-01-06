@@ -20,9 +20,9 @@ function listadoEstudiantes(){
             <div class="sparkbar" data-color="#00a65a" data-height="20">' . $res['dir_usu'] . '</div>
             </td>
             <td>
-                <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Draft</button>
+                <button type="button" class="btn btn-default editar" ><i class="fas fa-pencil-alt"></i> Editar</button>
 
-                <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>
+                <button type="reset" class="btn btn-default borrar"><i class="fas fa-times"></i> Discard</button>
             </td>
 
             

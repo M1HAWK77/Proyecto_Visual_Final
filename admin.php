@@ -1,4 +1,85 @@
 <?php include("cabecera.php"); ?>
+<!-- incluyo script de prueba para modal -->
+<script src="JqueryLib.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+            var usuario_id="";
+            var opcion;
+
+            // puedo acceder a las class de otras clases
+            $(".editar").click(function(){
+                fila= $(this).closest("tr");//captura la fila
+                usuario_id=fila.find('td:eq(0)').text();//que busque la columna con la posicion
+                usuario_nombre=fila.find('td:eq(1)').text();
+                $("#nombreUsuario").val(usuario_nombre);
+                $("#modalCrud").modal('show');
+
+            });
+            
+            $(".borrar").click(function(){
+
+                fila= $(this).closest("tr");//captura la fila
+                usuario_id=fila.find('td:eq(0)').text();//que busque la columna con la posicion
+                usuario_nombre=fila.find('td:eq(1)').text();
+                $("#modalCrudBorrar").modal('show');
+
+            });
+
+            //control del submit
+            $("#formUsuarios").submit(function(e){ //variable cualquiera que coloco
+                e.preventDefault(); //evita que el formulario mande todo hacia el servidor
+                nombreUsuario= $("#nombreUsuario").val();
+                opcion=1;
+
+                var arraySeparadorCadena=nombreUsuario.split(" ");
+                alert(arraySeparadorCadena);
+                $.ajax({
+                    url: "validaciones.php",
+                    type: "POST",
+                    data: {
+                        usuario_id: usuario_id,
+                        nom1: arraySeparadorCadena[0],
+                        nom2: arraySeparadorCadena[1],
+                        ape1: arraySeparadorCadena[2],
+                        ape2: arraySeparadorCadena[3],
+                        opcion: opcion
+                    },
+                    success: function(resultado){
+                    location.reload();
+
+                    }
+
+                });
+
+            });
+
+            //Borrar
+            $("#formSalir").submit(function(e){ //variable cualquiera que coloco
+                e.preventDefault(); //evita que el formulario mande todo hacia el servidor
+                nombreUsuario= $("#nombreUsuario").val();
+                opcion=2;
+                $.ajax({
+                    url: "validaciones.php",
+                    type: "POST",
+                    data: {
+                        usuario_id: usuario_id,
+                        opcion: opcion
+                    },
+                    success: function(resultado){
+                    location.reload();
+
+                    }
+
+                });
+
+            });
+
+        });
+    </script>
+
+<!-- Fin de incluir script de prueba para modal -->
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -112,6 +193,10 @@
         </div>
         <!-- /.card-footer -->
       </div>
+
+      <?php include("modalEditar.php");?>
+      <?php include("modalBorrar.php");?>
+
 
       <!-- FIN TABLE: LATEST ORDERS -->
 
