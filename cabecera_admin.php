@@ -9,7 +9,7 @@ if(!isset($_SESSION['user']) || !isset($_SESSION['rol'])){
     if($_SESSION['rol'] == ''){
         header("location:index.php"); //me da problemas y me muestra que la pagina no esta disponible
     }else{
-        echo("existe el usuario " .$_SESSION['user']. " y se ha definido como " . $_SESSION['rol'].'CabeceraOtros');
+        echo("existe el usuario " .$_SESSION['user']. " y se ha definido como " . $_SESSION['rol'].' CabeceraAdmin');
         if ($_SESSION['rol'] == 'admin') {
         }
     }

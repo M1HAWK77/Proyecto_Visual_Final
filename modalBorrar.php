@@ -16,7 +16,7 @@
                     arial-label="Close">X</button>
                 </div>
 
-                <form id="formSalir">
+                <form id="formBorrar">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-lg-6">

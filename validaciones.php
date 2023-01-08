@@ -34,9 +34,9 @@ if (isset($_POST['mail'])) {
 //Inicio Editar usuario
 if(isset($_POST['opcion']) && $_POST['opcion']==1){
     $con = conectar();
-    $query = "UPDATE usuarios SET nom1_usu=?, nom2_usu=?, ape1_usu=?, ape2_usu=? WHERE  ced_usu = ?";
+    $query = "UPDATE usuarios SET nom1_usu=?, nom2_usu=?, ape1_usu=?, ape2_usu=?, mail_usu=?, dir_usu=? WHERE  ced_usu = ?";
     $sentencia = $con->prepare($query);
-    $sentencia->execute(array($_POST['nom1'],$_POST['nom2'],$_POST['ape1'],$_POST['ape2'], $_POST['usuario_id']));
+    $sentencia->execute(array($_POST['nom1'],$_POST['nom2'],$_POST['ape1'],$_POST['ape2'], $_POST['cor'],$_POST['dir'],$_POST['usuario_id']));
     echo ("Usuario editado");
 }
 //Fin editar usuario
@@ -50,3 +50,11 @@ if(isset($_POST['opcion']) && $_POST['opcion']==2){
     echo ("Usuario Borrado");
 }
 //Fin de borrar Usuario
+
+//salir
+if(isset($_POST['opcion']) && $_POST['opcion']=="salir"){
+    $_SESSION['nombre'] = "";
+    $_SESSION['rol'] = "";
+    session_destroy();
+    echo ("Usuario deslogueado");
+}

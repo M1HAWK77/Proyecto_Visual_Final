@@ -1,20 +1,19 @@
 <?php
 session_start();
-if(!isset($_SESSION['user']) || !isset($_SESSION['rol'])){
-    echo("no existe");
-    $_SESSION['user'] = '';
-    $_SESSION['rol'] = '';
-    header("location:index.php");
-}else{
-    if($_SESSION['rol'] == ''){
-        // header("location:index.php"); me da problemas y me muestra que la pagina no esta disponible
-    }else{
-        echo("existe el usuario " .$_SESSION['user']. " y se ha definido como " . $_SESSION['rol']);
-        if ($_SESSION['rol'] == 'admin') {
-            header('location: admin.php');
-        }
+if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
+  echo ("no existe");
+  $_SESSION['user'] = '';
+  $_SESSION['rol'] = '';
+  header("location:index.php");
+} else {
+  if ($_SESSION['rol'] == '') {
+    header("location:index.php"); //me da problemas y me muestra que la pagina no esta disponible
+  } else {
+    echo ("existe el usuario " . $_SESSION['user'] . " y se ha definido como " . $_SESSION['rol']);
+    if ($_SESSION['rol'] == 'admin') {
+      header('location: admin.php');
     }
-
+  }
 }
 
 ?>
@@ -22,11 +21,12 @@ if(!isset($_SESSION['user']) || !isset($_SESSION['rol'])){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>UTA | Log in </title>
-  
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -39,82 +39,83 @@ if(!isset($_SESSION['user']) || !isset($_SESSION['rol'])){
   <script src="JqueryLib.js"></script>
 
   <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
       //alert("funcionaaa");
-      $("#ingresar").click(function(){
+      $("#ingresar").click(function() {
         alert("Click en sing in");
-        var userMail= $("#emailUser").val();
-        var userPw= $("#passwordUser").val();
-        var roleUser = (<?php echo json_encode($_SESSION['rol']); ?>);//guuardar la variable en jquery con variables de sesion
+        var userMail = $("#emailUser").val();
+        var userPw = $("#passwordUser").val();
+        var roleUser = (<?php echo json_encode($_SESSION['rol']); ?>); //guuardar la variable en jquery con variables de sesion
 
         $.post("validaciones.php", {
           mail: userMail,
           pw: userPw
-          
-        }, function(data, status){
-              alert("valor: "+data+" estado: "+status+userMail+userPw);
-              if (data >= 1 && roleUser=='admin' ){
-                alert('entro al if'+ roleUser);
-                window.open("admin.php");
-              }
-           })
+
+        }, function(data, status) {
+          alert("valor: " + data + " estado: " + status + userMail + userPw);
+          if (data >= 1 && roleUser == 'admin') {
+            alert('entro al if' + roleUser);
+            window.open("admin.php");
+          }
+        })
       });
-      
+
     });
   </script>
 
 </head>
 
 <body class="hold-transition login-page">
-<div class="login-box">
-  <!-- /.login-logo -->
-  <div class="card card-outline card-primary">
-    <div class="card-header text-center" style="background-color: #e74a3b ">
-      <a href="panel.php" class="h1"><b>UTA </b>DADV</a>
-    </div>
-    <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+  <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center" style="background-color: #e74a3b ">
+        <a href="panel.php" class="h1"><b>UTA </b>DADV</a>
+      </div>
+      <div class="card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
 
-      <form><!--aqui edite el method y href-->
-        <div class="input-group mb-3">
-          <input id="emailUser" type="email" class="form-control" placeholder="Email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+        <form><!--aqui edite el method y href-->
+          <div class="input-group mb-3">
+            <input id="emailUser" type="email" class="form-control" placeholder="Email">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="input-group mb-3">
-          <input id="passwordUser" type="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+          <div class="input-group mb-3">
+            <input id="passwordUser" type="password" class="form-control" placeholder="Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
+          <div class="row">
+            <div class="col-8">
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block " id="ingresar" name="ingresar">Sign In</button>
+            </div>
+            <!-- /.col -->
           </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block " id="ingresar" name="ingresar">Sign In</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-     
+        </form>
+
+      </div>
+      <!-- /.card-body -->
     </div>
-    <!-- /.card-body -->
+    <!-- /.card -->
   </div>
-  <!-- /.card -->
-</div>
-<!-- /.login-box -->
+  <!-- /.login-box -->
 
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+  <!-- jQuery -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.min.js"></script>
 </body>
+
 </html>

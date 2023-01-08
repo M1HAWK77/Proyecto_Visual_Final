@@ -1,4 +1,4 @@
-<?php include("cabecera.php"); ?>
+<?php include("cabecera_admin.php"); ?>
 <!-- incluyo script de prueba para modal -->
 <script src="JqueryLib.js"></script>
     
@@ -111,12 +111,12 @@
             <div class="inner">
               <h3>150</h3>
 
-              <p>Añadir Estudiantes</p>
+              <p>Gestionar Estudiantes</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="gestionEstudiantes.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -126,7 +126,7 @@
             <div class="inner">
               <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-              <p> Añadir Cursos </p>
+              <p> Gestionar Cursos </p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -141,7 +141,7 @@
             <div class="inner">
               <h3>44</h3>
 
-              <p>Añadir Materias</p>
+              <p>Gestionar Docentes</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -149,7 +149,7 @@
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-     
+         
       </div>
 
       <!-- TABLE: LATEST ORDERS -->
