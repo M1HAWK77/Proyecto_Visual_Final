@@ -13,7 +13,7 @@
             usuario_id = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             usuario_nombre = fila.find('td:eq(1)').text();
             $("#nombreUsuario").text(usuario_nombre);//Cambio lo que estaba escrito por el argumento que mando
-            $("#modalCrudEditar").modal('show');
+            $("#modalCrud").modal('show');
 
         });
 
@@ -28,10 +28,12 @@
 
         //Modulo apara agregar Estudiantes reference addEstudiante
         $("#addEstudiante").click(function(){
-            $("#modalCrudAgregar").modal('show');
+            $("#modalCrudAgregar")
+
+
         });
 
-        $("#formUsuariosEditar").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
+        $("#formUsuariosEstudiantesE").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
             nombreUsuario = $("#nombreUsuario").val();
             pNombre = $("#primerNombre").val();
@@ -76,43 +78,6 @@
                 type: "POST",
                 data: {
                     usuario_id: usuario_id,
-                    opcion: opcion
-                },
-                success: function(resultado) {
-                    location.reload();
-
-                }
-
-            });
-
-        });
-
-        //Agregar
-        $("#formUsuariosAgregar").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
-            alert('agregar click');
-            e.preventDefault(); //evita que el formulario mande todo hacia el servidor
-            cedula = $("#cedula").val();
-            pNombre = $("#primerNombreAdd").val();
-            sNombre = $("#segundoNombreAdd").val();
-            pApellido = $("#apellidoPaternoAdd").val();
-            sApellido = $("#apellidoMaternoAdd").val();
-            correo= $("#correoAdd").val();
-            password = $("#pw").val();
-            direccion= $("#direccionAdd").val();
-            opcion = 3;
-
-            $.ajax({
-                url: "validaciones.php",
-                type: "POST",
-                data: {
-                    ced: cedula,
-                    nom1: pNombre,
-                    nom2: sNombre,
-                    ape1: pApellido,
-                    ape2: sApellido,
-                    cor: correo,
-                    pw: password,
-                    dir: direccion,
                     opcion: opcion
                 },
                 success: function(resultado) {
@@ -229,7 +194,6 @@
 
             <?php include("modalEditar.php"); ?>
             <?php include("modalBorrar.php"); ?>
-            <?php include("modalAgregar.php"); ?>
 
 
             <!-- FIN TABLE: LATEST ORDERS -->

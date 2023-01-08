@@ -1,13 +1,15 @@
 <?php
 session_start();
 if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
-  echo ("no existe");
+  // echo ("no existe");
+  echo ("<script> alert('Session no instanciada') </script>");
   $_SESSION['user'] = '';
   $_SESSION['rol'] = '';
   header("location:index.php");
 } else {
   if ($_SESSION['rol'] == '') {
-    header("location:index.php"); //me da problemas y me muestra que la pagina no esta disponible
+    echo ("<script> alert('no existe')</script>");
+    //header("location:index.php"); //me da problemas y me muestra que la pagina no esta disponible
   } else {
     echo ("existe el usuario " . $_SESSION['user'] . " y se ha definido como " . $_SESSION['rol']);
     if ($_SESSION['rol'] == 'admin') {
@@ -15,7 +17,6 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
     }
   }
 }
-
 ?>
 
 

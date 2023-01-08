@@ -85,9 +85,8 @@ if(!isset($_SESSION['user']) || !isset($_SESSION['rol'])){
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="./panel.php" class="nav-link">Home</a>
-      </li>
-     
+        <a href="admin.php" class="nav-link">Home</a>
+      </li> 
     </ul>
 
     <!-- Right navbar links -->
@@ -146,7 +145,7 @@ if(!isset($_SESSION['user']) || !isset($_SESSION['rol'])){
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./panel.php" class="nav-link">
+                <a href="./admin.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>HOME</p>
                 </a>
@@ -154,7 +153,7 @@ if(!isset($_SESSION['user']) || !isset($_SESSION['rol'])){
               <li class="nav-item">
                 <a href="./index2.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>TAREAS</p>
+                  <p>Otros ej</p>
                 </a>
               </li>
             </ul>

@@ -1,4 +1,4 @@
-<?php include("cabecera_admin.php"); ?>
+<?php include("cabeceraAdmin.php"); ?>
 <!-- incluyo script de prueba para modal -->
 <script src="JqueryLib.js"></script>
     
@@ -131,7 +131,7 @@
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="gestionCursos.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
