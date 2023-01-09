@@ -41,24 +41,6 @@
                                 <label class="col-form-label">Direccion</label>
                                 <input type="text" id="direccionAdd" name="direccionAdd" class="form-control">
 
-                                <!-- <br>
-                                <label class="col-form-label">Cedula</label>
-                                <input type="text" id="cedula" name="cedula" class="form-control">
-                                <label class="col-form-label">Primer Nombre</label>
-                                <input type="text" id="primerNombre" name="primerNombre" class="form-control">
-                                <label class="col-form-label">Segundo Nombre</label>
-                                <input type="text" id="segundoNombre" name="segundoNombre" class="form-control">
-                                <label class="col-form-label">Apellido Paterno</label>
-                                <input type="text" id="apellidoPaterno" name="apellidoPaterno" class="form-control">
-                                <label class="col-form-label">Apellido Materno</label>
-                                <input type="text" id="apellidoMaterno" name="apellidoMaterno" class="form-control">
-                                <label class="col-form-label">Correo electronico</label>
-                                <input type="text" id="correo" name="correo" class="form-control">
-                                <label class="col-form-label">Contraseña</label>
-                                <input type="text" id="pw" name="pw" class="form-control">
-                                <label class="col-form-label">Direccion</label>
-                                <input type="text" id="direccion" name="direccion" class="form-control"> -->
-
                             </div>
 
                         </div>

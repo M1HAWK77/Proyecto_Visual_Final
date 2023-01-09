@@ -54,10 +54,11 @@ if(isset($_POST['opcion']) && $_POST['opcion']==2){
 //Inicio de agregar Usuario
 if(isset($_POST['opcion']) && $_POST['opcion']==3){
     $con = conectar();
-    $query = "INSERT INTO usuarios SET ced_usu=?, nom1_usu=?, nom2_usu=?, ape1_usu=?, ape2_usu=?, mail_usu=?,pw_usu=? ,dir_usu=? ,tipo_usu='estudiante'";
+    //cambio tipo_usu='estudiante' por ? y agreggo post 
+    $query = "INSERT INTO usuarios SET ced_usu=?, nom1_usu=?, nom2_usu=?, ape1_usu=?, ape2_usu=?, mail_usu=?,pw_usu=? ,dir_usu=? ,tipo_usu=?";
     $sentencia = $con->prepare($query);
     // $sentencia->execute(array($_POST['ced'],$_POST['nom1'],$_POST['nom2'],$_POST['ape1'],$_POST['ape2'], $_POST['cor'],$_POST['pw'],$_POST['dir']));
-    $sentencia->execute(array($_POST['ced'],$_POST['nom1'],$_POST['nom2'],$_POST['ape1'],$_POST['ape2'], $_POST['cor'],$_POST['pw'],$_POST['dir']));
+    $sentencia->execute(array($_POST['ced'],$_POST['nom1'],$_POST['nom2'],$_POST['ape1'],$_POST['ape2'], $_POST['cor'],$_POST['pw'],$_POST['dir'], $_POST['tipoUsuario']));
     echo ("<script>Usuario Creado</script>");
 }
 //Fin de agregar Usuario

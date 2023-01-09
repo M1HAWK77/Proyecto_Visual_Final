@@ -27,7 +27,7 @@
         });
 
         //Modulo apara agregar Estudiantes reference addEstudiante
-        $("#addEstudiante").click(function(){
+        $("#addDocente").click(function(){
             $("#modalCrudAgregar").modal('show');
         });
 
@@ -113,7 +113,7 @@
                     cor: correo,
                     pw: password,
                     dir: direccion,
-                    tipoUsuario: 'estudiante',
+                    tipoUsuario: 'docente',
                     opcion: opcion
                 },
                 success: function(resultado) {
@@ -159,14 +159,14 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>Añadir Estudiante</h3>
+                            <h3>Añadir Docente</h3>
 
                             <p>Modulo Registro</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a id="addEstudiante" class="small-box-footer">Desplegar registro <i class="fas fa-arrow-circle-right"></i></a>
+                        <a id="addDocente" class="small-box-footer">Desplegar registro <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 
@@ -189,7 +189,7 @@
             <!-- TABLE: LATEST ORDERS -->
             <div class="card">
                 <div class="card-header border-transparent">
-                    <h3 class="card-title">Listado Estudiantes</h3>
+                    <h3 class="card-title">Listado Docentes</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -214,7 +214,7 @@
                                 </tr>
                             </thead>
                             <?php include_once('consultas.php');
-                            echo listadoEstudiantes();  
+                            echo listadoDocentes();  
                             ?>
                         </table>
                     </div>
