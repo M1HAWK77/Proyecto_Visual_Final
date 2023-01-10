@@ -47,9 +47,9 @@
                 url: "validaciones.php",
                 type: "POST",
                 data: {
-                    idC: idC,
-                    nomC: nombreC,
-                    desC: descripcionC,
+                    idCurso: idC,
+                    nomCurso: nombreC,
+                    desCurso: descripcionC,
                     opcion: opcion
                 },
                 success: function(resultado) {

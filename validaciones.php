@@ -66,11 +66,11 @@ if(isset($_POST['opcion']) && $_POST['opcion']==3){
 
 //Inicio agregar Curso
 if (isset($_POST['opcion']) && $_POST['opcion'] == 4) {
-    echo ("<script>Curso op 4</script>");
+
     $con = conectar();
-    $query = "INSERT INTO cursos SET id_cur=?, nom_cur=?, desc_cur=? ";
+    $query = "INSERT INTO cursos SET id_cur=?, nom_cur=?, desc_cur=?";
     $sentence = $con->prepare($query);
-    $sentence-> execute(array($_POST['idC'], $_POST['nomC'], $_post['desC']));
+    $sentence-> execute(array($_POST['idCurso'], $_POST['nomCurso'], $_POST['desCurso']));
     echo ("<script>Curso Creado</script>");
 }
 //Fin agregar Curso
