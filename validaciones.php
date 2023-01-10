@@ -64,6 +64,26 @@ if(isset($_POST['opcion']) && $_POST['opcion']==3){
 //Fin de agregar Usuario
 
 
+//Inicio agregar Curso
+if (isset($_POST['opcion']) && $_POST['opcion'] == 4) {
+    echo ("<script>Curso op 4</script>");
+    $con = conectar();
+    $query = "INSERT INTO cursos SET id_cur=?, nom_cur=?, desc_cur=? ";
+    $sentence = $con->prepare($query);
+    $sentence-> execute(array($_POST['idC'], $_POST['nomC'], $_post['desC']));
+    echo ("<script>Curso Creado</script>");
+}
+//Fin agregar Curso
+
+//Inicio de borrar Curso
+if(isset($_POST['opcion']) && $_POST['opcion']==5){
+    $con = conectar();
+    $query = "DELETE FROM cursos  WHERE id_cur=? ";
+    $sentencia = $con->prepare($query);
+    $sentencia->execute(array($_POST['idC']));
+    echo ("<script>Curso Borrado</script>");
+}
+//Fin de borrar Curso
 
 //salir
 if(isset($_POST['opcion']) && $_POST['opcion']=="salir"){

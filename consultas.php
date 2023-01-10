@@ -65,3 +65,33 @@ function listadoDocentes(){
 
 }
 
+function listadoCursos()
+{
+  $con = conectar();
+  $query = "SELECT * FROM cursos";
+  $sentence= $con->prepare($query);
+  $sentence->execute();
+  $result = $sentence->fetchAll();
+
+  $filas="";
+  foreach($result as $res){
+    $filas .= '<tbody>
+    <tr>
+      <td><a href="pages/examples/invoice.php">' . $res['id_cur'] . '</a></td>
+      <td>' . $res['nom_cur'] .'</td>
+      <td><span class="badge badge-success">' . $res['desc_cur'] . '</span></td>
+      <td> <button type="button" class="btn btn-default gestion" ><i class="fas fa-wrench"></i> Gestión Curso</button> </td>
+      <td>
+          <button type="button" class="btn btn-default editar" ><i class="fas fa-pencil-alt"></i> Editar</button>
+
+          <button type="reset" class="btn btn-default borrar"><i class="fas fa-times"></i> Discard</button>
+      </td>
+
+      
+    </tr>';
+  }
+
+  return $filas;
+
+
+}

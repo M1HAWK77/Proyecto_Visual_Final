@@ -6,6 +6,7 @@
     $(document).ready(function() {
         var usuario_id = "";
         var opcion;
+        var cursoId="";
 
         // puedo acceder a las class de otras clases
         $(".editar").click(function() {
@@ -20,43 +21,35 @@
         $(".borrar").click(function() {
 
             fila = $(this).closest("tr"); //captura la fila
-            usuario_id = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
+            cursoId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             usuario_nombre = fila.find('td:eq(1)').text();
+            $("#txtDel").text('Confirmación para eliminar Curso');
             $("#modalCrudBorrar").modal('show');
 
         });
 
         //Modulo apara agregar Estudiantes reference addEstudiante
-        $("#addEstudiante").click(function(){
-            $("#modalCrudAgregar")
-
+        $("#addCurso").click(function(){
+            $("#modalCrudAddCurso").modal("show");
 
         });
 
-        $("#formUsuariosEstudiantesE").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
+            //Agregar
+        $("#formAgregarCurso").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
+            alert('agregar click CURSO');
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
-            nombreUsuario = $("#nombreUsuario").val();
-            pNombre = $("#primerNombre").val();
-            sNombre = $("#segundoNombre").val();
-            pApellido = $("#apellidoPaterno").val();
-            sApellido = $("#apellidoMaterno").val();
-            correo = $("#correo").val();
-            direccion = $("#direccion").val();
-            opcion = 1;
+            idC = $("#idCurso").val();
+            nombreC = $("#nombreCurso").val();
+            descripcionC = $("#descripcionCurso").val();
+            opcion = 4;
 
-            var arraySeparadorCadena = nombreUsuario.split(" ");
-            alert(arraySeparadorCadena);
             $.ajax({
                 url: "validaciones.php",
                 type: "POST",
                 data: {
-                    usuario_id: usuario_id,
-                    nom1: pNombre,
-                    nom2: sNombre,
-                    ape1: pApellido,
-                    ape2: sApellido,
-                    cor: correo,
-                    dir: direccion,
+                    idC: idC,
+                    nomC: nombreC,
+                    desC: descripcionC,
                     opcion: opcion
                 },
                 success: function(resultado) {
@@ -68,16 +61,16 @@
 
         });
 
+
         //Borrar
         $("#formBorrar").submit(function(e) { //variable cualquiera que coloco
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
-            nombreUsuario = $("#nombreUsuario").val();
-            opcion = 2;
+            opcion = 5;
             $.ajax({
                 url: "validaciones.php",
                 type: "POST",
                 data: {
-                    usuario_id: usuario_id,
+                    idC: cursoId,
                     opcion: opcion
                 },
                 success: function(resultado) {
@@ -123,14 +116,14 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>Añadir Estudiante</h3>
+                            <h3>Añadir Curso</h3>
 
                             <p>Modulo Registro</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a id="addEstudiante" class="small-box-footer">Desplegar registro <i class="fas fa-arrow-circle-right"></i></a>
+                        <a id="addCurso" class="small-box-footer">Desplegar registro <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
 
@@ -153,7 +146,7 @@
             <!-- TABLE: LATEST ORDERS -->
             <div class="card">
                 <div class="card-header border-transparent">
-                    <h3 class="card-title">Listado Estudiantes</h3>
+                    <h3 class="card-title">Listado Cursos</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -170,15 +163,15 @@
                         <table class="table m-0">
                             <thead>
                                 <tr>
-                                    <th>Cedula</th>
-                                    <th>Nombres</th>
-                                    <th>Correo electronico</th>
-                                    <th>Dirección</th>
-                                    <th>status</th>
+                                    <th>Identificador Curso</th>
+                                    <th>Nombre del Curso</th>
+                                    <th>Descripción del curso</th>
+                                    <th>Gestión Asignaturas</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <?php include_once('consultas.php');
-                            echo listadoEstudiantes();  
+                            echo listadoCursos();  
                             ?>
                         </table>
                     </div>
@@ -192,7 +185,7 @@
                 <!-- /.card-footer -->
             </div>
 
-            <?php include("modalEditar.php"); ?>
+            <?php include("modalAgregarCurso.php"); ?>
             <?php include("modalBorrar.php"); ?>
 
 

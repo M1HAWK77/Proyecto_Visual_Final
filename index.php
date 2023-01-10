@@ -43,7 +43,6 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
     $(document).ready(function() {
       //alert("funcionaaa");
       $("#ingresar").click(function() {
-        alert("Click en sing in");
         var userMail = $("#emailUser").val();
         var userPw = $("#passwordUser").val();
         var roleUser = (<?php echo json_encode($_SESSION['rol']); ?>); //guuardar la variable en jquery con variables de sesion

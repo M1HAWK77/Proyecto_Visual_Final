@@ -9,7 +9,7 @@
             <div class="modal-content">   <!--dar color al contenedor  -->
 
                 <div class="modal-header">
-                    <h2>Confirmacion para eliminar Usuario</h2>
+                    <h2 id="txtDel">Confirmacion para eliminar Usuario</h2>
 
                     <!--data-dismiss="modal" que al cerrar quite los modals -->
                     <button type="button" class="close" data-dismiss="modal"
