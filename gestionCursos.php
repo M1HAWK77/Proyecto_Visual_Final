@@ -4,17 +4,34 @@
 
 <script>
     $(document).ready(function() {
-        var usuario_id = "";
         var opcion;
         var cursoId="";
 
         // puedo acceder a las class de otras clases
+        $(".gestion").click(function() {
+            fila = $(this).closest("tr"); //captura la fila
+            cursoId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
+            alert(cursoId);
+            $.ajax({
+                url: "consultas.php",
+                type: "POST",
+                data: {
+                    idCursoAsignatura: cursoId
+                },
+                success: function(resultado) {
+
+                }
+                
+            });
+
+            window.open("gestionAsignaturas.php");
+        });
+
+
         $(".editar").click(function() {
             fila = $(this).closest("tr"); //captura la fila
-            usuario_id = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
-            usuario_nombre = fila.find('td:eq(1)').text();
-            $("#nombreUsuario").text(usuario_nombre);//Cambio lo que estaba escrito por el argumento que mando
-            $("#modalCrud").modal('show');
+            cursoId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
+            $("#modalCrudEditCurso").modal('show');
 
         });
 
@@ -22,7 +39,6 @@
 
             fila = $(this).closest("tr"); //captura la fila
             cursoId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
-            usuario_nombre = fila.find('td:eq(1)').text();
             $("#txtDel").text('Confirmación para eliminar Curso');
             $("#modalCrudBorrar").modal('show');
 
@@ -34,9 +50,8 @@
 
         });
 
-            //Agregar
+        //Agregar
         $("#formAgregarCurso").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
-            alert('agregar click CURSO');
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
             idC = $("#idCurso").val();
             nombreC = $("#nombreCurso").val();
@@ -50,6 +65,30 @@
                     idCurso: idC,
                     nomCurso: nombreC,
                     desCurso: descripcionC,
+                    opcion: opcion
+                },
+                success: function(resultado) {
+                    location.reload();
+
+                }
+
+            });
+
+        });
+        //Editar
+        $("#formEditarCurso").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
+            e.preventDefault(); //evita que el formulario mande todo hacia el servidor
+            nombreC = $("#enombreCurso").val();
+            descripcionC = $("#edescripcionCurso").val();
+            opcion = 6;
+
+            $.ajax({
+                url: "validaciones.php",
+                type: "POST",
+                data: {
+                    nomCurso: nombreC,
+                    desCurso: descripcionC,
+                    idCurso: cursoId,
                     opcion: opcion
                 },
                 success: function(resultado) {
@@ -187,6 +226,7 @@
 
             <?php include("modalAgregarCurso.php"); ?>
             <?php include("modalBorrar.php"); ?>
+            <?php include("modalEditarCurso.php"); ?>
 
 
             <!-- FIN TABLE: LATEST ORDERS -->

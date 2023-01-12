@@ -8,7 +8,7 @@
             <div class="modal-content">   <!--dar color al contenedor  -->
 
                 <div class="modal-header">
-                    <h2>Seccion para agregar usuarios</h2>
+                    <h2>Seccion para agregar Cursos</h2>
 
                     <!--data-dismiss="modal" que al cerrar quite los modals -->
                     <button type="button" class="close" data-dismiss="modal"

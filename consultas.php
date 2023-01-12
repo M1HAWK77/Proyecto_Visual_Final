@@ -1,5 +1,9 @@
 <?php
 include_once("conectarBD.php");
+
+//$asignaturaMateria = $_POST['idCursoAsignatura'];
+// var_dump($asignaturaMateria); sale indefinido
+
 function listadoEstudiantes(){
     $con=conectar();
     $query="SELECT * FROM usuarios WHERE tipo_usu='estudiante'";
@@ -25,7 +29,7 @@ function listadoEstudiantes(){
                 <button type="reset" class="btn btn-default borrar"><i class="fas fa-times"></i> Discard</button>
             </td>
 
-            
+
           </tr>';
     }
 
@@ -57,7 +61,7 @@ function listadoDocentes(){
                 <button type="reset" class="btn btn-default borrar"><i class="fas fa-times"></i> Discard</button>
             </td>
 
-            
+
           </tr>';
     }
 
@@ -87,11 +91,42 @@ function listadoCursos()
           <button type="reset" class="btn btn-default borrar"><i class="fas fa-times"></i> Discard</button>
       </td>
 
-      
+
     </tr>';
   }
 
   return $filas;
 
+
+}
+
+function listadoAsignaturas()
+{
+
+  $con = conectar();
+  $query = "SELECT * FROM asignaturas WHERE id_cur_per=?";
+  $sentence= $con->prepare($query);
+  // $sentence->execute(array($_POST['idCursoAsignatura']));
+  $sentence->execute(array($_POST['idCursoAsignatura']));
+  $result = $sentence->fetchAll();
+
+  $filas="";
+  foreach($result as $res){
+    $filas .= '<tbody>
+    <tr>
+      <td><a href="pages/examples/invoice.php">' . $res['id_asig'] . '</a></td>
+      <td>' . $res['nom_asig'] .'</td>
+      <td> <button type="button" class="btn btn-default gestion" ><i class="fas fa-wrench"></i> Gestión Curso</button> </td>
+      <td>
+          <button type="button" class="btn btn-default editar" ><i class="fas fa-pencil-alt"></i> Editar</button>
+
+          <button type="reset" class="btn btn-default borrar"><i class="fas fa-times"></i> Discard</button>
+      </td>
+
+
+    </tr>';
+  }
+
+  return $filas;
 
 }

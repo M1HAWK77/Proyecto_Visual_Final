@@ -75,6 +75,7 @@ if (isset($_POST['opcion']) && $_POST['opcion'] == 4) {
 }
 //Fin agregar Curso
 
+
 //Inicio de borrar Curso
 if(isset($_POST['opcion']) && $_POST['opcion']==5){
     $con = conectar();
@@ -84,6 +85,16 @@ if(isset($_POST['opcion']) && $_POST['opcion']==5){
     echo ("<script>Curso Borrado</script>");
 }
 //Fin de borrar Curso
+
+//Inicio editar Curso
+if (isset($_POST['opcion']) && $_POST['opcion'] == 6) {
+
+    $con = conectar();
+    $query = "UPDATE cursos SET nom_cur=?, desc_cur=? WHERE id_cur=?";
+    $sentence = $con->prepare($query);
+    $sentence-> execute(array($_POST['nomCurso'], $_POST['desCurso'], $_POST['idCurso']));
+}
+//Fin editar Curso
 
 //salir
 if(isset($_POST['opcion']) && $_POST['opcion']=="salir"){
