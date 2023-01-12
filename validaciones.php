@@ -24,7 +24,8 @@ if (isset($_POST['mail'])) {
     $obtainData = $sentence->fetch();
     $result = $sentence->rowCount();
     if ($result >= 1) {
-        $_SESSION['user'] = $obtainData['nom1_usu'];
+        // $_SESSION['user'] = $obtainData['nom1_usu'];
+        $_SESSION['user'] = $obtainData['nom1_usu'].' '.$obtainData['nom2_usu'].' '.$obtainData['ape1_usu'].' '.$obtainData['ape2_usu'];
         $_SESSION['rol'] = $obtainData['tipo_usu'];
         }
     echo $result;
@@ -95,6 +96,38 @@ if (isset($_POST['opcion']) && $_POST['opcion'] == 6) {
     $sentence-> execute(array($_POST['nomCurso'], $_POST['desCurso'], $_POST['idCurso']));
 }
 //Fin editar Curso
+
+
+//Inicio de graficar tabla Asignturas segun el curso 
+if (isset($_POST['idCurso'])) {
+    $con = conectar();
+    // $query = "SELECT * FROM asignaturas WHERE id_cur_per=".$_SESSION['idCA']." ";
+    $query = "SELECT * FROM asignaturas WHERE id_cur_per=? ";
+    $sentence = $con->prepare($query);
+    $sentence->execute(array($_POST['idCurso']));
+    //$sentence->execute();
+    $result = $sentence->fetchAll();
+
+    $filas = "";
+    foreach ($result as $res) {
+        $filas .= '<tbody>
+    <tr>
+      <td><a href="pages/examples/invoice.php">' . $res['id_asig'] . '</a></td>
+      <td>' . $res['nom_asig'] . '</td>
+      <td> <button type="button" class="btn btn-default gestion" ><i class="fas fa-wrench"></i> Gestión Curso</button> </td>
+      <td>
+          <button type="button" class="btn btn-default editar" ><i class="fas fa-pencil-alt"></i> Editar</button>
+
+          <button type="reset" class="btn btn-default borrar"><i class="fas fa-times"></i> Discard</button>
+      </td>
+
+
+    </tr>';
+    }
+    echo $filas;
+}
+//Fin de graficar tabla Asignturas segun el curso 
+
 
 //salir
 if(isset($_POST['opcion']) && $_POST['opcion']=="salir"){

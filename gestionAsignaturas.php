@@ -1,5 +1,27 @@
 <?php include("cabeceraAdmin.php"); ?>
+<script src="JqueryLib.js"></script>
 
+<script>
+    $(document).ready(function() {
+        //obtener valor del pk de cursos
+        var urlCursos= $(location).attr('href');
+        var arrayCad= urlCursos.split('=');
+        // for(var cad of arrayCad){
+        //     alert(cad);
+        // }
+        //alert(urlCursos);
+        
+        $.post("validaciones.php", {
+            idCurso: arrayCad[1]
+
+        }, function(data, status) {
+           alert("valor: " + data + " estado: ");
+        })
+
+    });
+
+
+</script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

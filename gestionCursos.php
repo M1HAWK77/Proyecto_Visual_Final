@@ -5,26 +5,14 @@
 <script>
     $(document).ready(function() {
         var opcion;
-        var cursoId="";
+        var cursoId = "";
 
         // puedo acceder a las class de otras clases
         $(".gestion").click(function() {
             fila = $(this).closest("tr"); //captura la fila
             cursoId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             alert(cursoId);
-            $.ajax({
-                url: "consultas.php",
-                type: "POST",
-                data: {
-                    idCursoAsignatura: cursoId
-                },
-                success: function(resultado) {
-
-                }
-                
-            });
-
-            window.open("gestionAsignaturas.php");
+            window.open("gestionAsignaturas.php?id="+cursoId+"");
         });
 
 
@@ -45,7 +33,7 @@
         });
 
         //Modulo apara agregar Estudiantes reference addEstudiante
-        $("#addCurso").click(function(){
+        $("#addCurso").click(function() {
             $("#modalCrudAddCurso").modal("show");
 
         });
@@ -210,7 +198,7 @@
                                 </tr>
                             </thead>
                             <?php include_once('consultas.php');
-                            echo listadoCursos();  
+                            echo listadoCursos();
                             ?>
                         </table>
                     </div>

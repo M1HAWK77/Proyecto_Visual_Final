@@ -1,9 +1,6 @@
 <?php
 include_once("conectarBD.php");
 
-//$asignaturaMateria = $_POST['idCursoAsignatura'];
-// var_dump($asignaturaMateria); sale indefinido
-
 function listadoEstudiantes(){
     $con=conectar();
     $query="SELECT * FROM usuarios WHERE tipo_usu='estudiante'";
@@ -104,10 +101,11 @@ function listadoAsignaturas()
 {
 
   $con = conectar();
-  $query = "SELECT * FROM asignaturas WHERE id_cur_per=?";
+  // $query = "SELECT * FROM asignaturas WHERE id_cur_per=".$_SESSION['idCA']." ";
+  $query = "SELECT * FROM asignaturas WHERE id_cur_per=? ";
   $sentence= $con->prepare($query);
-  // $sentence->execute(array($_POST['idCursoAsignatura']));
-  $sentence->execute(array($_POST['idCursoAsignatura']));
+  $sentence->execute(array($_POST['idCurso']));
+  //$sentence->execute();
   $result = $sentence->fetchAll();
 
   $filas="";
