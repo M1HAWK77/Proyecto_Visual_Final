@@ -1,6 +1,5 @@
 <?php
 include_once("conectarBD.php");
-
 function listadoEstudiantes(){
     $con=conectar();
     $query="SELECT * FROM usuarios WHERE tipo_usu='estudiante'";
@@ -97,15 +96,16 @@ function listadoCursos()
 
 }
 
-function listadoAsignaturas()
+function listadoAsignaturas($id)
 {
 
   $con = conectar();
-  // $query = "SELECT * FROM asignaturas WHERE id_cur_per=".$_SESSION['idCA']." ";
-  $query = "SELECT * FROM asignaturas WHERE id_cur_per=? ";
+  // $query = "SELECT * FROM asignaturas WHERE id_cur_per='SW1'";
+  $query = "SELECT * FROM asignaturas WHERE id_cur_per=?";
   $sentence= $con->prepare($query);
-  $sentence->execute(array($_POST['idCurso']));
-  //$sentence->execute();
+  $sentence->execute(array($id));
+  //$sentence->execute(array($_POST['idCurso']));
+  $sentence->execute();
   $result = $sentence->fetchAll();
 
   $filas="";
@@ -114,10 +114,8 @@ function listadoAsignaturas()
     <tr>
       <td><a href="pages/examples/invoice.php">' . $res['id_asig'] . '</a></td>
       <td>' . $res['nom_asig'] .'</td>
-      <td> <button type="button" class="btn btn-default gestion" ><i class="fas fa-wrench"></i> Gestión Curso</button> </td>
       <td>
           <button type="button" class="btn btn-default editar" ><i class="fas fa-pencil-alt"></i> Editar</button>
-
           <button type="reset" class="btn btn-default borrar"><i class="fas fa-times"></i> Discard</button>
       </td>
 

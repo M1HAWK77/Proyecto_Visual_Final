@@ -97,36 +97,33 @@ if (isset($_POST['opcion']) && $_POST['opcion'] == 6) {
 }
 //Fin editar Curso
 
+//Inicio agregar Asignatura op=7
 
-//Inicio de graficar tabla Asignturas segun el curso 
-if (isset($_POST['idCurso'])) {
+if (isset($_POST['opcion']) && $_POST['opcion'] == 7 ){
+
     $con = conectar();
-    // $query = "SELECT * FROM asignaturas WHERE id_cur_per=".$_SESSION['idCA']." ";
-    $query = "SELECT * FROM asignaturas WHERE id_cur_per=? ";
+    $query = "INSERT INTO asignaturas SET id_asig=?, nom_asig=?, id_cur_per=?";
     $sentence = $con->prepare($query);
-    $sentence->execute(array($_POST['idCurso']));
-    //$sentence->execute();
-    $result = $sentence->fetchAll();
+    $sentence->execute(array($_POST['idAsig'], $_POST['nomA'], $_POST['curPer']));
+    echo ($_POST['idAsig']. $_POST['nomA']. $_POST['curPer']);
 
-    $filas = "";
-    foreach ($result as $res) {
-        $filas .= '<tbody>
-    <tr>
-      <td><a href="pages/examples/invoice.php">' . $res['id_asig'] . '</a></td>
-      <td>' . $res['nom_asig'] . '</td>
-      <td> <button type="button" class="btn btn-default gestion" ><i class="fas fa-wrench"></i> Gestión Curso</button> </td>
-      <td>
-          <button type="button" class="btn btn-default editar" ><i class="fas fa-pencil-alt"></i> Editar</button>
-
-          <button type="reset" class="btn btn-default borrar"><i class="fas fa-times"></i> Discard</button>
-      </td>
-
-
-    </tr>';
-    }
-    echo $filas;
 }
-//Fin de graficar tabla Asignturas segun el curso 
+
+//Fin agregar Asignatura
+
+//Inicio Editar Asignatura op=8
+
+if (isset($_POST['opcion']) && $_POST['opcion'] == 8 ){
+
+    $con = conectar();
+    $query = "UPDATE asignaturas SET id_asig=?, nom_asig=?, where id_cur_per=?";
+    $sentence = $con->prepare($query);
+    $sentence->execute(array($_POST['idAsig'], $_POST['nomA'], $_POST['curPer']));
+
+}
+
+//Fin editar Asignatura
+
 
 
 //salir
