@@ -96,6 +96,7 @@ function listadoCursos()
 
 }
 
+
 function listadoAsignaturas($id)
 {
 

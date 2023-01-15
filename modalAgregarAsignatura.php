@@ -21,8 +21,6 @@
                             <div class="form-group">
 
                                 <br>
-                                <label class="col-form-label">Identificador Asignatura</label>
-                                <input type="text" id="idAsignatura" name="idAsignatura" class="form-control">
                                 <label class="col-form-label">Nombre de la Asignatura</label>
                                 <input type="text" id="nombreAsignatura" name="nombreAsignatura" class="form-control">
 

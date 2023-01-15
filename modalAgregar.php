@@ -22,7 +22,6 @@
                         <div class="col-lg-10 row">
                             <div class="form-group">
 
-                            
                                 <br>
                                 <label class="col-form-label">Cedula</label>
                                 <input type="text" id="cedula" name="cedula" class="form-control">
@@ -40,6 +39,15 @@
                                 <input type="text" id="pw" name="pw" class="form-control">
                                 <label class="col-form-label">Direccion</label>
                                 <input type="text" id="direccionAdd" name="direccionAdd" class="form-control">
+                                <br>
+                                <a id="upload" href="#" class="btn btn-sm btn-info float-left">Subir archivos</a>
+                                    
+
+                                <!-- 
+                                <label class="col-form-label">Nombre de la imagen</label>
+                                <input type="text" id="nombreImg" name="nombreImg" class="form-control">
+                                <label class="col-form-label">Selecciona una imagen</label>
+                                <input type="file" id="imgUser" name="imgUser" class="form-control"> -->
 
                             </div>
 

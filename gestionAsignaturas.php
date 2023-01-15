@@ -12,8 +12,7 @@
 
         $("#addAsignatura").click(function() {
             $("#modalCrudAddAsignatura").modal("show");
-        });
-      
+        }); 
 
         $(".editar").click(function() {
             fila = $(this).closest("tr"); //captura la fila
@@ -31,10 +30,11 @@
 
         });
 
+
         //Agregar
         $("#formAgregarAsignatura").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
-            idA = $("#idAsignatura").val();
+            idA = $("#idAsignatura").val();//si lo borro se pudre el crud de agregar, pero en realidad no tiene funcionalidad
             nombreA = $("#nombreAsignatura").val();
             opcion = 7;
             alert(idA+ nombreA);

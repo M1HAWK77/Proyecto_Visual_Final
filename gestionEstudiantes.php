@@ -29,7 +29,13 @@
         //Modulo apara agregar Estudiantes reference addEstudiante
         $("#addEstudiante").click(function(){
             $("#modalCrudAgregar").modal('show');
+            
         });
+
+        //modal adentro del modal 
+        $("#upload").click(function() {
+            $("#modalSubirArchivos").modal("show");
+        }); 
 
         $("#formUsuariosEditar").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
@@ -125,7 +131,29 @@
 
         });
 
+             //Borrar
+             $("#formUsuariosSubirArchivos").submit(function(e) { //variable cualquiera que coloco
+            e.preventDefault(); //evita que el formulario mande todo hacia el servidor
+            rutaImg = $("#nombreImg").val();
+            opcion = "upImg"
+            $.ajax({
+                url: "validaciones.php",
+                type: "POST",
+                data: {
+                    imgName: rutaImg,
+                    opcion: opcion
+                },
+                success: function(resultado) {
+                    location.reload();
+
+                }
+
+            });
+
+        });
+
     });
+
 </script>
 
 <!-- Fin de incluir script de prueba para modal -->
@@ -231,6 +259,7 @@
             <?php include("modalEditar.php"); ?>
             <?php include("modalBorrar.php"); ?>
             <?php include("modalAgregar.php"); ?>
+            <?php include("modalSubirDocumento.php"); ?>
 
 
             <!-- FIN TABLE: LATEST ORDERS -->
