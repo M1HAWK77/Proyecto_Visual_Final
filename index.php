@@ -56,6 +56,8 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
           if (data >= 1 && roleUser == 'admin') {
             alert('entro al if' + roleUser);
             window.open("admin.php");
+          }else if(data >= 1 && roleUser == 'estudiante'){
+            window.open("estudiantes.php");
           }
         })
       });

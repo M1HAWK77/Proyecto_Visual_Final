@@ -40,14 +40,11 @@
                                 <label class="col-form-label">Direccion</label>
                                 <input type="text" id="direccionAdd" name="direccionAdd" class="form-control">
                                 <br>
-                                <a id="upload" href="#" class="btn btn-sm btn-info float-left">Subir archivos</a>
+                                <!-- <a id="upload" href="#" class="btn btn-sm btn-info float-left">Subir archivos</a> -->
                                     
-
-                                <!-- 
-                                <label class="col-form-label">Nombre de la imagen</label>
-                                <input type="text" id="nombreImg" name="nombreImg" class="form-control">
+                                <!-- Desde aqui va la nueva funcion que agrego  -->
                                 <label class="col-form-label">Selecciona una imagen</label>
-                                <input type="file" id="imgUser" name="imgUser" class="form-control"> -->
+                                <input type="file" id="imgUser" name="imgUser">
 
                             </div>
 
