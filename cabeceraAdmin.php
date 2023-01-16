@@ -4,6 +4,7 @@ if(!isset($_SESSION['user']) || !isset($_SESSION['rol'])){
     echo("no existe");
     $_SESSION['user'] = '';
     $_SESSION['rol'] = '';
+    //$_SESSION['cedula'] = '';
     header("location:index.php"); 
 }else{
     if($_SESSION['rol'] == ''){
@@ -30,12 +31,15 @@ if(!isset($_SESSION['user']) || !isset($_SESSION['rol'])){
     //alert("funcionaaa");
       var user = (<?php echo json_encode($_SESSION['user']); ?>);//guuardar la variable en jquery con variables de sesion
       var rol = (<?php echo json_encode($_SESSION['rol']); ?>);//guuardar la variable en jquery con variables de sesion
+      var usuarioId = (<?php echo json_encode($_SESSION['cedula']); ?>);//Agrege 16/01/2023 para ver si se arrregla lo de las variables de session
+
       $("#usuario").text(user);
       $("#salir").click(function(){
 
         $.post("validaciones.php", {
           nombre: user,
           rol: rol,
+          id: usuarioId, //agrego 16/01/2023
           opcion: "salir"
           
         }, function(data, status){

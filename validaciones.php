@@ -27,6 +27,7 @@ if (isset($_POST['mail'])) {
         // $_SESSION['user'] = $obtainData['nom1_usu'];
         $_SESSION['user'] = $obtainData['nom1_usu'].' '.$obtainData['nom2_usu'].' '.$obtainData['ape1_usu'].' '.$obtainData['ape2_usu'];
         $_SESSION['rol'] = $obtainData['tipo_usu'];
+        $_SESSION['cedula'] = $obtainData['ced_usu'];
         }
     echo $result;
 }
@@ -157,6 +158,7 @@ if (isset($_POST['opcion']) && $_POST['opcion'] == 8 ){
 if(isset($_POST['opcion']) && $_POST['opcion']=="salir"){
     $_SESSION['nombre'] = "";
     $_SESSION['rol'] = "";
+    $_SESSION['cedula'] = "";
     session_destroy();
     echo ("Usuario deslogueado");
 }

@@ -2,7 +2,7 @@
 <!-- incluyo script de prueba para modal -->
 <script src="JqueryLib.js"></script>
     
-    <script>
+    <!-- <script>
         $(document).ready(function(){
             var usuario_id="";
             var opcion;
@@ -76,7 +76,7 @@
             });
 
         });
-    </script>
+    </script> -->
 
 <!-- Fin de incluir script de prueba para modal -->
 

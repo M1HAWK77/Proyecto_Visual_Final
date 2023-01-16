@@ -74,7 +74,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Estudiantes</li>
+                        <li class="breadcrumb-item active">Docente</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -91,9 +91,9 @@
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="card" style="width: 18rem;">
-                        <img src="dist/img/user2-160x160.jpg" class="card-img-top" alt="...">
+                        <img src="dist/img/user8-128x128.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">Estimado estudiante, en esta seccion podra editar sus datos</p>
+                            <p class="card-text">Estimado Docente, en esta seccion podra editar sus datos</p>
                             <button id="edit" type="button" class="btn btn-outline-success">Editar</button>
                         </div>
                     </div>

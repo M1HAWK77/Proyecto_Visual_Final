@@ -14,6 +14,10 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
     echo ("existe el usuario " . $_SESSION['user'] . " y se ha definido como " . $_SESSION['rol']);
     if ($_SESSION['rol'] == 'admin') {
       header('location: admin.php');
+    }else if($_SESSION['rol'] == 'estudiante'){
+      header('location: estudiantes.php');
+    } else if($_SESSION['rol'] == 'docente') {
+      header('location: docentes.php');
     }
   }
 }
@@ -45,7 +49,6 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
       $("#ingresar").click(function() {
         var userMail = $("#emailUser").val();
         var userPw = $("#passwordUser").val();
-        var roleUser = (<?php echo json_encode($_SESSION['rol']); ?>); //guuardar la variable en jquery con variables de sesion
 
         $.post("validaciones.php", {
           mail: userMail,
@@ -58,6 +61,8 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
             window.open("admin.php");
           }else if(data >= 1 && roleUser == 'estudiante'){
             window.open("estudiantes.php");
+          }else if(data >= 1 && roleUser == 'docente'){
+            window.open("docentes.php");
           }
         })
       });

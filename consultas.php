@@ -106,7 +106,7 @@ function listadoAsignaturas($id)
   $sentence= $con->prepare($query);
   $sentence->execute(array($id));
   //$sentence->execute(array($_POST['idCurso']));
-  $sentence->execute();
+  //$sentence->execute();
   $result = $sentence->fetchAll();
 
   $filas="";
@@ -126,4 +126,28 @@ function listadoAsignaturas($id)
 
   return $filas;
 
+}
+
+function datosEstudiante(){
+  $con = conectar();
+  $query = "SELECT * FROM usuarios WHERE ced_usu=?";
+  $sentence= $con->prepare($query);
+  $sentence->execute(array($_SESSION['cedula']));
+  $result = $sentence->fetchAll();
+
+  $filas="";
+  foreach ($result as $res) {
+    $filas .=
+      '<tbody>
+    <tr>
+        <td>'.$res['ced_usu'].'</td>
+        <td>' . $res['nom1_usu'] . ' ' . $res['nom2_usu'] . '</td>
+        <td>' . $res['ape1_usu'] . ' ' . $res['ape2_usu']. '</td>
+        <td>' . $res['mail_usu'] . '</td>
+        <td>' . $res['dir_usu'] . '</td>
+        <td><span class="badge bg-danger">55%</span></td>
+    </tr>
+    </tbody>';
+  }
+  return $filas;
 }
