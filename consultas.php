@@ -113,7 +113,7 @@ function listadoAsignaturas($id)
   foreach($result as $res){
     $filas .= '<tbody>
     <tr>
-      <td><a href="pages/examples/invoice.php">' . $res['id_asig'] . '</a></td>
+      <td><a href="#">' . $res['id_asig'] . '</a></td>
       <td>' . $res['nom_asig'] .'</td>
       <td>
           <button type="button" class="btn btn-default editar" ><i class="fas fa-pencil-alt"></i> Editar</button>

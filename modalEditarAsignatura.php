@@ -2,7 +2,6 @@
 <div class="modal fade" id="modalCrudEditAsignatura" tabindex="" role="dialog" arial-labelledby="ejemplo" 
     aria-hidden="true">
         <!--arial-labelledby="ejemplo" definir o delimitar el area  -->
-    	
         <div class="modal-dialog" role="document"> <!--document, digo que este modal va a tener incrustado un documento-->
         
             <div class="modal-content">   <!--dar color al contenedor  -->

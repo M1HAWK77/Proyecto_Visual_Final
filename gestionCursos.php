@@ -19,6 +19,8 @@
         $(".editar").click(function() {
             fila = $(this).closest("tr"); //captura la fila
             cursoId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
+            $("#enombreCurso").val(fila.find('td:eq(1)').text());
+            $("#edescripcionCurso").val(fila.find('td:eq(2)').text());
             $("#modalCrudEditCurso").modal('show');
 
         });

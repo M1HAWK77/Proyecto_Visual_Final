@@ -17,16 +17,15 @@
         $(".editar").click(function() {
             fila = $(this).closest("tr"); //captura la fila
             asigId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
-            $("#modalEditAsignatura").modal('show');
+            $("#modalCrudEditAsignatura").modal("show");
 
         });
 
         $(".borrar").click(function() {
-
             fila = $(this).closest("tr"); //captura la fila
             asigId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             $("#txtDel").text('Confirmación para eliminar Asignatura');
-            $("#modalCrudBorrar").modal('show');
+            $("#modalCrudBorrar").modal("show");
 
         });
 
@@ -37,7 +36,7 @@
             idA = $("#idAsignatura").val();//si lo borro se pudre el crud de agregar, pero en realidad no tiene funcionalidad
             nombreA = $("#nombreAsignatura").val();
             opcion = 7;
-            alert(idA+ nombreA);
+            //alert(idA+ nombreA);
             
             $.ajax({
                 url: "validaciones.php",
@@ -64,7 +63,7 @@
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
             idA = $("#eidAsignatura").val();
             nombreA = $("#enombreAsignatura").val();
-            opcion = 7;
+            opcion = 8;
             alert(idA+ nombreA);
             
             $.ajax({

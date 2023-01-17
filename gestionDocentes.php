@@ -12,7 +12,15 @@
             fila = $(this).closest("tr"); //captura la fila
             usuario_id = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             usuario_nombre = fila.find('td:eq(1)').text();
-            $("#nombreUsuario").text(usuario_nombre);//Cambio lo que estaba escrito por el argumento que mando
+            var arraySeparadorCadena = usuario_nombre.split(" ");
+
+            $("#nombreUsuario").text(usuario_nombre); //Cambio lo que estaba escrito por el argumento que mando
+            $("#primerNombre").val(arraySeparadorCadena[0]);
+            $("#segundoNombre").val(arraySeparadorCadena[1]);
+            $("#apellidoPaterno").val(arraySeparadorCadena[2]);
+            $("#apellidoMaterno").val(arraySeparadorCadena[3]);
+            $("#correo").val(fila.find('td:eq(2)').text());
+            $("#direccion").val(fila.find('td:eq(3)').text());
             $("#modalCrudEditar").modal('show');
 
         });
@@ -27,7 +35,7 @@
         });
 
         //Modulo apara agregar Estudiantes reference addEstudiante
-        $("#addDocente").click(function(){
+        $("#addDocente").click(function() {
             $("#modalCrudAgregar").modal('show');
         });
 
@@ -96,9 +104,9 @@
             sNombre = $("#segundoNombreAdd").val();
             pApellido = $("#apellidoPaternoAdd").val();
             sApellido = $("#apellidoMaternoAdd").val();
-            correo= $("#correoAdd").val();
+            correo = $("#correoAdd").val();
             password = $("#pw").val();
-            direccion= $("#direccionAdd").val();
+            direccion = $("#direccionAdd").val();
             opcion = 3;
 
             $.ajax({
@@ -214,7 +222,7 @@
                                 </tr>
                             </thead>
                             <?php include_once('consultas.php');
-                            echo listadoDocentes();  
+                            echo listadoDocentes();
                             ?>
                         </table>
                     </div>
