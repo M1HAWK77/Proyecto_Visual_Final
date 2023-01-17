@@ -56,32 +56,6 @@ if(isset($_POST['opcion']) && $_POST['opcion']==2){
 //Inicio de agregar Usuario
 if(isset($_POST['opcion']) && $_POST['opcion']==3){
     $con = conectar();
- //------------Update para guardar imagen-----------------
-    if ($_POST['imgUser'] != null) {
-
-        // $ruta= "./img/usuImg/"
-        $ruta = "/img/usuImg/";
-        if (isset($_FILES[$_POST['imgUser']]) && $FILES[$_POST['imgUser']['name'][0]]){
-            for ($i=0; $i < count($_FILES[$_POST['imgUser']]); $i++){
-
-                if ($_FILES[$_POST['imgUser']]['type'][$i] == "image/jpeg") {
-                
-                }
-
-            }
-
-        }
-
-        $query = "INSERT INTO usuarios SET ced_usu=?, nom1_usu=?, nom2_usu=?, ape1_usu=?, ape2_usu=?, mail_usu=?,pw_usu=? ,dir_usu=? ,tipo_usu=?";
-        $sentencia = $con->prepare($query);
-        $sentencia->execute(array($_POST['ced'],$_POST['nom1'],$_POST['nom2'],$_POST['ape1'],$_POST['ape2'], $_POST['cor'],$_POST['pw'],$_POST['dir'], $_POST['tipoUsuario']));
-        
-    }
-
-
-
- //------------Update para guardar imagen fin-------------
-
     //cambio tipo_usu='estudiante' por ? y agreggo post 
     $query = "INSERT INTO usuarios SET ced_usu=?, nom1_usu=?, nom2_usu=?, ape1_usu=?, ape2_usu=?, mail_usu=?,pw_usu=? ,dir_usu=? ,tipo_usu=?";
     $sentencia = $con->prepare($query);

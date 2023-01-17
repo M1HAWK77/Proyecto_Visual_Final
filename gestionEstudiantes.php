@@ -55,10 +55,6 @@
             sApellido = $("#apellidoMaterno").val();
             correo = $("#correo").val();
             direccion = $("#direccion").val();
-            // Nueva funcion desde aqui
-            fileImg=$("#imgUser").val();    
-
-            // Nueva funcion desde aqui FIN
             opcion = 1;
 
           
@@ -118,6 +114,7 @@
             password = $("#pw").val();
             direccion= $("#direccionAdd").val();
             opcion = 3;
+ 
 
             $.ajax({
                 url: "validaciones.php",
@@ -142,28 +139,6 @@
             });
 
         });
-
-        //     //Borrar
-        //      $("#formUsuariosSubirArchivos").submit(function(e) { //variable cualquiera que coloco
-        //     e.preventDefault(); //evita que el formulario mande todo hacia el servidor
-        //     rutaImg = $("#nombreImg").val();
-        //     opcion = "upImg"
-        //     $.ajax({
-        //         url: "validaciones.php",
-        //         type: "POST",
-        //         data: {
-        //             estId: usuario_id,
-        //             imgName: rutaImg,
-        //             opcion: opcion
-        //         },
-        //         success: function(resultado) {
-        //             location.reload();
-
-        //         }
-
-        //     });
-
-        // });
 
     });
 
