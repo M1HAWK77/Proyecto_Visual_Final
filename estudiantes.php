@@ -28,7 +28,7 @@
             correo = $("#correo").val();
             direccion = $("#direccion").val();
             // Nueva funcion desde aqui
-            fileImg=$("#imgUser").val();    
+            fileImg = $("#imgUser").val();
 
             // Nueva funcion desde aqui FIN
             opcion = 1;
@@ -119,15 +119,42 @@
                         echo datosEstudiante();
                         ?>
                     </table>
+                    <!-- IMPLEMENTO MATRICULA -->
+                    <br> <br>
+
+                    <div class="row">
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>150</h3>
+
+                                    <p>Matricularse</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person-add"></i>
+                                </div>
+                                <a href="gestionEstudiantes.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- IMPLEMENTO MATRICULA -->
                 </div>
 
                 <!-- aqui termina  -->
             </div>
 
+            
+            <?php
+            // include("consultas.php");
+            // echo listarAsignaturasEstudiante();
+            ?>
+            
             <div class="row">
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-info">
+                <div class="col-lg-3 col-6"> 
+            <!-- small box -->
+            <div class="small-box bg-info">
                         <div class="inner">
                             <h3>150</h3>
 
@@ -139,10 +166,10 @@
                         <a href="gestionEstudiantes.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
                         <div class="inner">
                             <h3>44</h3>
 
