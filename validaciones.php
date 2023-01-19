@@ -36,9 +36,9 @@ if (isset($_POST['mail'])) {
 //Inicio Editar usuario
 if(isset($_POST['opcion']) && $_POST['opcion']==1){
     $con = conectar();
-    $query = "UPDATE usuarios SET nom1_usu=?, nom2_usu=?, ape1_usu=?, ape2_usu=?, mail_usu=?, dir_usu=? WHERE  ced_usu = ?";
+    $query = "UPDATE usuarios SET nom1_usu=?, nom2_usu=?, ape1_usu=?, ape2_usu=?, mail_usu=?, dir_usu=?, img_usu=? WHERE  ced_usu = ?";
     $sentencia = $con->prepare($query);
-    $sentencia->execute(array($_POST['nom1'],$_POST['nom2'],$_POST['ape1'],$_POST['ape2'], $_POST['cor'],$_POST['dir'],$_POST['usuario_id']));
+    $sentencia->execute(array($_POST['nom1'],$_POST['nom2'],$_POST['ape1'],$_POST['ape2'], $_POST['cor'],$_POST['dir'], $_POST['img'] ,$_POST['usuario_id']));
     echo ("Usuario editado");
 }
 //Fin editar usuario
@@ -57,11 +57,10 @@ if(isset($_POST['opcion']) && $_POST['opcion']==2){
 if(isset($_POST['opcion']) && $_POST['opcion']==3){
     $con = conectar();
     //cambio tipo_usu='estudiante' por ? y agreggo post 
-    $query = "INSERT INTO usuarios SET ced_usu=?, nom1_usu=?, nom2_usu=?, ape1_usu=?, ape2_usu=?, mail_usu=?,pw_usu=? ,dir_usu=? ,tipo_usu=?";
+    $query = "INSERT INTO usuarios SET ced_usu=?, nom1_usu=?, nom2_usu=?, ape1_usu=?, ape2_usu=?, mail_usu=?,pw_usu=? ,dir_usu=? ,tipo_usu=?, img_usu=?";
     $sentencia = $con->prepare($query);
     // $sentencia->execute(array($_POST['ced'],$_POST['nom1'],$_POST['nom2'],$_POST['ape1'],$_POST['ape2'], $_POST['cor'],$_POST['pw'],$_POST['dir']));
-    $sentencia->execute(array($_POST['ced'],$_POST['nom1'],$_POST['nom2'],$_POST['ape1'],$_POST['ape2'], $_POST['cor'],$_POST['pw'],$_POST['dir'], $_POST['tipoUsuario']));
-
+    $sentencia->execute(array($_POST['ced'],$_POST['nom1'],$_POST['nom2'],$_POST['ape1'],$_POST['ape2'], $_POST['cor'],$_POST['pw'],$_POST['dir'], $_POST['tipoUsuario'], $_POST['img']));    
     echo ("<script>Usuario Creado</script>");
 }
 //Fin de agregar Usuario
@@ -125,6 +124,17 @@ if (isset($_POST['opcion']) && $_POST['opcion'] == 8 ){
 }
 
 //Fin editar Asignatura
+
+//inicio borrar Asignatura 9
+if (isset($_POST['opcion']) && $_POST['opcion'] == 9 ){
+
+    $con = conectar();
+    $query = "DELETE FROM asignaturas WHERE id_asig=?";
+    $sentence = $con->prepare($query);
+    $sentence->execute(array($_POST['idAsig']));
+
+}
+//Fin borrar Asignatura
 
 
 

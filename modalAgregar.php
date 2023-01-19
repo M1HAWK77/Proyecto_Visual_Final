@@ -40,11 +40,7 @@
                                 <label class="col-form-label">Direccion</label>
                                 <input type="text" id="direccionAdd" name="direccionAdd" class="form-control">
                                 <br>
-                                <!-- <a id="upload" href="#" class="btn btn-sm btn-info float-left">Subir archivos</a> -->
-                                <!-- Desde aqui va la nueva funcion que agrego  -->
-                                <label class="col-form-label">Selecciona una imagen</label>
-                                <input type="file" id="imgUser" >
-
+                                <a id="uploadAgregar" href="#" class="btn btn-sm btn-info float-left">Subir archivos</a>
                             </div>
 
                         </div>

@@ -7,6 +7,10 @@
         var usuario_id = "";
         var opcion;
 
+        $("#upload").click(function() {
+            $("#modalSubirArchivos").modal("show");
+        });
+
         // puedo acceder a las class de otras clases
         $("#edit").click(function() {
             fila = $(this).closest("tr"); //captura la fila
@@ -147,8 +151,8 @@
 
             
             <?php
-            // include("consultas.php");
-            // echo listarAsignaturasEstudiante();
+            //include("consultas.php");
+            //echo listarAsignaturasEstudiante();
             ?>
             
             <div class="row">
@@ -185,6 +189,7 @@
 
             <?php include("modalEditar.php"); ?>
             <?php include("modalBorrar.php"); ?>
+            <?php include("modalSubirDocumento.php"); ?>
 
 
             <!-- FIN TABLE: LATEST ORDERS -->

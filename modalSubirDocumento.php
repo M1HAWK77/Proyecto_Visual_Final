@@ -8,14 +8,14 @@
             <div class="modal-content">   <!--dar color al contenedor  -->
 
                 <div class="modal-header">
-                    <h2>Seccion para agregar usuarios</h2>
+                    <h2>Seleccion de imagenes</h2>
 
                     <!--data-dismiss="modal" que al cerrar quite los modals -->
                     <button type="button" class="close" data-dismiss="modal"
                     arial-label="Close">X</button>
                 </div>
 
-                <form id="formUsuariosSubirArchivos">
+                <form id="subirArchivos" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="row">
                         <!-- aqui va 6 -->
@@ -23,10 +23,8 @@
                             <div class="form-group">
 
                                 <br>    
-                                <label class="col-form-label">Nombre de la imagen</label>
-                                <input type="text" id="nombreImg" name="nombreImg" class="form-control">
                                 <label class="col-form-label">Selecciona una imagen</label>
-                                <input type="file" id="imgUser" name="imgUser" class="form-control"> 
+                                <input type="file" id="file" name="file" class="form-control"> 
 
                             </div>
 
@@ -36,7 +34,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="btn" type="submit">Guardar</button>
+                    <input type="button" id="Upload" value="Upload">
+                    <!-- <button class="btn" type="button" value="Subir archivo">Subir archivo</button> -->
                 </div>
             </form>
 

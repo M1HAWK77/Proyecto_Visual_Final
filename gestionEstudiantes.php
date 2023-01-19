@@ -1,11 +1,11 @@
 <?php include("cabeceraAdmin.php") ?>
 
 <script src="JqueryLib.js"></script>
-
 <script>
     $(document).ready(function() {
         var usuario_id = "";
         var opcion;
+        var ruta="";
 
         // puedo acceder a las class de otras clases
         $(".editar").click(function() {
@@ -14,7 +14,7 @@
             usuario_nombre = fila.find('td:eq(1)').text();
             var arraySeparadorCadena = usuario_nombre.split(" ");
 
-            $("#nombreUsuario").text(usuario_nombre);//Cambio lo que estaba escrito por el argumento que mando
+            $("#nombreUsuario").text(usuario_nombre); //Cambio lo que estaba escrito por el argumento que mando
             $("#primerNombre").val(arraySeparadorCadena[0]);
             $("#segundoNombre").val(arraySeparadorCadena[1]);
             $("#apellidoPaterno").val(arraySeparadorCadena[2]);
@@ -35,16 +35,20 @@
         });
 
         //Modulo apara agregar Estudiantes reference addEstudiante
-        $("#addEstudiante").click(function(){
+        $("#addEstudiante").click(function() {
             $("#modalCrudAgregar").modal('show');
-            
+
         });
 
         //modal adentro del modal 
 
-        // $("#upload").click(function() {
-        //     $("#modalSubirArchivos").modal("show");
-        // }); 
+        $("#upload").click(function() {
+            $("#modalSubirArchivos").modal("show");
+        });
+
+        $("#uploadAgregar").click(function() {
+            $("#modalSubirArchivos").modal("show");
+        });
 
         $("#formUsuariosEditar").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
@@ -55,9 +59,9 @@
             sApellido = $("#apellidoMaterno").val();
             correo = $("#correo").val();
             direccion = $("#direccion").val();
+            rutaImg= ruta;
             opcion = 1;
 
-          
             $.ajax({
                 url: "validaciones.php",
                 type: "POST",
@@ -69,6 +73,7 @@
                     ape2: sApellido,
                     cor: correo,
                     dir: direccion,
+                    img: ruta,
                     opcion: opcion
                 },
                 success: function(resultado) {
@@ -110,11 +115,13 @@
             sNombre = $("#segundoNombreAdd").val();
             pApellido = $("#apellidoPaternoAdd").val();
             sApellido = $("#apellidoMaternoAdd").val();
-            correo= $("#correoAdd").val();
+            correo = $("#correoAdd").val();
             password = $("#pw").val();
-            direccion= $("#direccionAdd").val();
-            opcion = 3;
- 
+            direccion = $("#direccionAdd").val();
+            rutaImg= ruta;
+            opcion = 3;  
+
+            // Nueva funcion desde aqui FIN
 
             $.ajax({
                 url: "validaciones.php",
@@ -129,6 +136,7 @@
                     pw: password,
                     dir: direccion,
                     tipoUsuario: 'estudiante',
+                    img: ruta,
                     opcion: opcion
                 },
                 success: function(resultado) {
@@ -140,8 +148,33 @@
 
         });
 
-    });
+        //SUBIR ARCHIVOS
+        $("#Upload").click(function() { //variable cualquiera que coloco
+            var fd = new FormData();
+            var files = $('#file')[0].files[0];
+            fd.append('file', files);
+            // AJAX request
 
+            $.ajax({
+                url: 'validarImg.php',
+                type: 'post',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response != 0) {
+                        // Show image preview
+                        alert("Imagen subida: " + response);
+                        $('#imgUsu').text(response);
+                        ruta = response;
+                    } else {
+                        alert('file not uploaded');
+                    }
+                }
+            });
+        });
+
+    });
 </script>
 
 <!-- Fin de incluir script de prueba para modal -->
@@ -230,7 +263,7 @@
                                 </tr>
                             </thead>
                             <?php include_once('consultas.php');
-                            echo listadoEstudiantes();  
+                            echo listadoEstudiantes();
                             ?>
                         </table>
                     </div>
@@ -247,7 +280,7 @@
             <?php include("modalEditar.php"); ?>
             <?php include("modalBorrar.php"); ?>
             <?php include("modalAgregar.php"); ?>
-            <?php //include("modalSubirDocumento.php"); ?> 
+            <?php include("modalSubirDocumento.php"); ?>
 
 
             <!-- FIN TABLE: LATEST ORDERS -->

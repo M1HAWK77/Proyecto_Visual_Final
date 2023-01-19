@@ -9,19 +9,20 @@
         var valor = arrayCad[1];
         //alert(valor);
         var opcion;
+        var asigId="";
 
         $("#addAsignatura").click(function() {
             $("#modalCrudAddAsignatura").modal("show");
         }); 
 
-        $(".editar").click(function() {
+        $(".editarAsignatura").click(function() {
             fila = $(this).closest("tr"); //captura la fila
             asigId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             $("#modalCrudEditAsignatura").modal("show");
 
         });
 
-        $(".borrar").click(function() {
+        $(".borrarAsignatura").click(function() {
             fila = $(this).closest("tr"); //captura la fila
             asigId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             $("#txtDel").text('Confirmación para eliminar Asignatura');
@@ -87,12 +88,12 @@
          //Borrar
          $("#formBorrar").submit(function(e) { //variable cualquiera que coloco
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
-            opcion = 5;
+            opcion = 9;
             $.ajax({
                 url: "validaciones.php",
                 type: "POST",
                 data: {
-                    idC: cursoId,
+                    idAsig: asigId,
                     opcion: opcion
                 },
                 success: function(resultado) {
@@ -212,9 +213,10 @@
                 <!-- /.card-footer -->
             </div>
 
-            <?php include("modalAgregarAsignatura.php"); ?>
-            <?php include("modalBorrar.php"); ?>
+            <!-- Eh aqui el problema de los modales, tenia que ver con la posicion en que los llamo -->
             <?php include("modalEditarAsignatura.php"); ?>
+            <?php include("modalBorrar.php"); ?>
+            <?php include("modalAgregarAsignatura.php"); ?>
             
 
             <!-- /.content -->

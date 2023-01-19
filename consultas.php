@@ -80,7 +80,7 @@ function listadoCursos()
       <td><a href="pages/examples/invoice.php">' . $res['id_cur'] . '</a></td>
       <td>' . $res['nom_cur'] . '</td>
       <td><span class="badge badge-success">' . $res['desc_cur'] . '</span></td>
-      <td> <button type="button" class="btn btn-default gestion" ><i class="fas fa-wrench"></i> Gestión Curso</button> </td>
+      <td> <button type="button" class="btn btn-default gestion" ><i class="fas fa-wrench"></i> Gestión Asignaturas</button> </td>
       <td>
           <button type="button" class="btn btn-default editar" ><i class="fas fa-pencil-alt"></i> Editar</button>
 
@@ -99,12 +99,9 @@ function listadoAsignaturas($id)
 {
 
   $con = conectar();
-  // $query = "SELECT * FROM asignaturas WHERE id_cur_per='SW1'";
   $query = "SELECT * FROM asignaturas WHERE id_cur_per=?";
   $sentence = $con->prepare($query);
   $sentence->execute(array($id));
-  //$sentence->execute(array($_POST['idCurso']));
-  //$sentence->execute();
   $result = $sentence->fetchAll();
 
   $filas = "";
@@ -114,8 +111,8 @@ function listadoAsignaturas($id)
       <td><a href="#">' . $res['id_asig'] . '</a></td>
       <td>' . $res['nom_asig'] . '</td>
       <td>
-          <button type="button" class="btn btn-default editar" ><i class="fas fa-pencil-alt"></i> Editar</button>
-          <button type="reset" class="btn btn-default borrar"><i class="fas fa-times"></i> Discard</button>
+          <button type="button" class="btn btn-default editarAsignatura" ><i class="fas fa-pencil-alt"></i> Editar</button>
+          <button type="reset" class="btn btn-default borrarAsignatura"><i class="fas fa-times"></i> Discard</button>
       </td>
 
 
@@ -124,6 +121,26 @@ function listadoAsignaturas($id)
 
   return $filas;
 }
+
+function comboBoxDocentes()
+{
+  
+  $con = conectar();
+  $query = "SELECT * FROM usuarios WHERE tipo_usu=docente";
+  $sentence = $con->prepare($query);
+  $sentence->execute();
+  $result = $sentence->fetchAll();
+  $selectB = "";
+  foreach ($result as $res) {
+    $selectB = '
+    <select class="form-select" aria-label="Default select example">
+    <option selected id=' . $res['ced_usu'] . '>' . $res['nom1_usu'] . $res['ape1_usu'] . '</option>
+    </select>';
+  }
+  return $selectB;
+}
+
+
 
 function datosEstudiante()
 {
@@ -156,32 +173,34 @@ function listarAsignaturasEstudiante()
   // $query = "SELECT asignaturas.nom_asig FROM asignaturas INNER JOIN
   //           detalle_asignaturas ON asignaturas.id_asig=detalle_asignaturas.id_det_asig WHERE  detalle_asignaturas.ced_usu_det=?";
 
-  $query = "SELECT asignaturas.nom_asig FROM asignaturas,  detalle_asignaturas WHERE  asignaturas.id_asig=detalle_asignaturas.id_asi_det AND
-              detalle_asignaturas.ced_usu_det=?";
+  $query = "SELECT asignaturas.nom_asig FROM asignaturas,  detalle_asignaturas WHERE  asignaturas.id_asig=detalle_asignaturas.id_asi_per AND
+              detalle_asignaturas.ced_usu_det='1802'";
 
   $sentence = $con->prepare($query);
-  $sentence->execute(array($_SESSION['cedula']));
-  $result = $sentence->fetch();
+  //$sentence->execute(array($_SESSION['cedula']));
+  $sentence->execute();
+  $result = $sentence->fetchAll();
 
-  $filas = "";
+  return $result;
+  //$filas = "";
 
-  foreach ($result as $res) {
-    // $filas .=
-    // '
-    //     <div class="col-lg-3 col-6">
-    //       <!-- small box -->
-    //       <div class="small-box bg-info">
-    //       <div class="inner">
-    //           <h3>150</h3>
+  // foreach ($result as $res) {
+  //   $filas .=
+  //   '
+  //       <div class="col-lg-3 col-6">
+  //         <!-- small box -->
+  //         <div class="small-box bg-info">
+  //         <div class="inner">
+  //             <h3>150</h3>
 
-    //           <p>'.$res['nom_asig'].'</p>
-    //       </div>
-    //       <div class="icon">
-    //           <i class="ion ion-person-add"></i>
-    //         </div>
-    //       <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-    //     </div>
-    //   </div>';
-  }
-  return $filas;
+  //             <p>'.$res['nom_asig'].'</p>
+  //         </div>
+  //         <div class="icon">
+  //             <i class="ion ion-person-add"></i>
+  //           </div>
+  //         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+  //       </div>
+  //     </div>';
+  // }
+  // return $filas;
 }

@@ -33,7 +33,8 @@
                                 <input type="text" id="correo" name="correo" class="form-control">
                                 <label class="col-form-label">Direccion</label>
                                 <input type="text" id="direccion" name="direccion" class="form-control">
-
+                                <br>
+                                <a id="upload" href="#" class="btn btn-sm btn-info float-left">Subir archivos</a>
                             </div>
 
                         </div>

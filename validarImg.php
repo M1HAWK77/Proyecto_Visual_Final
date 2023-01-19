@@ -1,23 +1,23 @@
 <?php 
+// file name
+$filename = $_FILES['file']['name'];
 
-//------------Update para guardar imagen-----------------
+// Location
+$location = 'img/usuImg/'.$filename;
 
-if (isset($_FILES['imgUser'])) {
-    $archivo = $_FILES["imgUser"]["name"];
-    $carpeta = "img/usuImg/";
-    if (move_uploaded_file($_FILES["imgUser"]["tmp_name"], $carpeta . $archivo)) {
-        echo "Archivo subido con exito";
-    }else{
-        echo "Fallo en cargar archivo";
-    }
+// file extension
+$file_extension = pathinfo($location, PATHINFO_EXTENSION);
+$file_extension = strtolower($file_extension);
+
+// Valid image extensions
+$image_ext = array("jpg","png","jpeg","gif");
+
+$response = 0;
+if(in_array($file_extension,$image_ext)){
+	// Upload file
+	if(move_uploaded_file($_FILES['file']['tmp_name'],$location)){
+		$response = $location;
+	}
 }
-//------------Update para guardar imagen fin-------------
 
-// if (isset($_POST['opcion']) && $_POST['opcion'] == "upImg" ){
-
-//     $con = conectar();
-//     $query = "UPDATE asignaturas SET id_asig=?, nom_asig=?, where id_cur_per=?";
-//     $sentence = $con->prepare($query);
-//     $sentence->execute(array($_POST['idAsig'], $_POST['nomA'], $_POST['curPer']));
-
-// }
+echo $response;
