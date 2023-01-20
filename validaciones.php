@@ -103,10 +103,12 @@ if (isset($_POST['opcion']) && $_POST['opcion'] == 6) {
 if (isset($_POST['opcion']) && $_POST['opcion'] == 7 ){
 
     $con = conectar();
-    $query = "INSERT INTO asignaturas SET id_asig=?, nom_asig=?, id_cur_per=?";
+    // $query = "INSERT INTO asignaturas SET id_asig=?, nom_asig=?, id_cur_per=?";
+    $query = "INSERT INTO asignaturas SET id_asig=?, nom_asig=?, docente_asi=?, id_cur_per=?";
     $sentence = $con->prepare($query);
-    $sentence->execute(array($_POST['idAsig'], $_POST['nomA'], $_POST['curPer']));
-    echo ($_POST['idAsig']. $_POST['nomA']. $_POST['curPer']);
+   // $sentence->execute(array($_POST['idAsig'], $_POST['nomA'], $_POST['curPer']));
+    $sentence->execute(array($_POST['idAsig'], $_POST['nomA'], $_POST['docAsi'] ,$_POST['curPer']));
+    //echo ($_POST['idAsig']. $_POST['nomA']. $_POST['curPer']);
 
 }
 

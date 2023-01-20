@@ -23,7 +23,15 @@
                                 <br>
                                 <label class="col-form-label">Nombre de la Asignatura</label>
                                 <input type="text" id="nombreAsignatura" name="nombreAsignatura" class="form-control">
-
+                                <br>
+                                <label class="col-form-label">Elegir docente para la asignatura  </label>
+                                <br>
+                                <select class="form-select" aria-label="Default select example" id="eSeleccion">
+                                    <?php 
+                                        include("consutas.php");
+                                        echo comboBoxDocentes();
+                                    ?> 
+                                </select>
                             </div>
 
                         </div>

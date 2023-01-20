@@ -126,16 +126,13 @@ function comboBoxDocentes()
 {
   
   $con = conectar();
-  $query = "SELECT * FROM usuarios WHERE tipo_usu=docente";
+  $query = "SELECT * FROM usuarios WHERE tipo_usu='docente'";
   $sentence = $con->prepare($query);
   $sentence->execute();
   $result = $sentence->fetchAll();
   $selectB = "";
   foreach ($result as $res) {
-    $selectB = '
-    <select class="form-select" aria-label="Default select example">
-    <option selected id=' . $res['ced_usu'] . '>' . $res['nom1_usu'] . $res['ape1_usu'] . '</option>
-    </select>';
+    $selectB.= '<option selected value='.$res['ced_usu'].'>'.$res['nom1_usu'].' '.$res['ape1_usu'].'</option>';
   }
   return $selectB;
 }

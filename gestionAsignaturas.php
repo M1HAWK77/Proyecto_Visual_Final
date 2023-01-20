@@ -18,6 +18,7 @@
         $(".editarAsignatura").click(function() {
             fila = $(this).closest("tr"); //captura la fila
             asigId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
+            $("#eidAsignatura").val(fila.find('td:eq(1)').text());
             $("#modalCrudEditAsignatura").modal("show");
 
         });
@@ -36,6 +37,8 @@
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
             idA = $("#idAsignatura").val();//si lo borro se pudre el crud de agregar, pero en realidad no tiene funcionalidad
             nombreA = $("#nombreAsignatura").val();
+            //select
+            docSelect=$("#eSeleccion").val();
             opcion = 7;
             //alert(idA+ nombreA);
             
@@ -46,6 +49,7 @@
                     idAsig: idA,
                     nomA: nombreA,
                     curPer: valor,
+                    docAsi: docSelect,
                     opcion: opcion
                 },
                 success: function(resultado) {
@@ -64,6 +68,7 @@
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
             idA = $("#eidAsignatura").val();
             nombreA = $("#enombreAsignatura").val();
+            //docSelected= $("#eseleccion").val
             opcion = 8;
             alert(idA+ nombreA);
             
