@@ -22,10 +22,10 @@
                             <div class="form-group">
                                 <br>
                                 <label class="col-form-label">Nombre de la Asignatura</label>
-                                <input type="text" id="eidAsignatura" name="eidAsignatura" class="form-control">
+                                <input type="text" id="eNomAsignatura" name="eNomAsignatura" class="form-control">
                                 <label class="col-form-label">Elegir docente para la asignatura</label>
                                 <br>
-                                <select class="form-select" aria-label="Default select example" id="eseleccion">
+                                <select class="form-select" aria-label="Default select example" id="eSeleccion">
                                 <?php 
                                     include("consutas.php");
                                     echo comboBoxDocentes();

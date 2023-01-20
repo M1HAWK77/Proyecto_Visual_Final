@@ -26,7 +26,7 @@
                                 <br>
                                 <label class="col-form-label">Elegir docente para la asignatura  </label>
                                 <br>
-                                <select class="form-select" aria-label="Default select example" id="eSeleccion">
+                                <select class="form-select" aria-label="Default select example" id="aSeleccion">
                                     <?php 
                                         include("consutas.php");
                                         echo comboBoxDocentes();

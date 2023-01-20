@@ -178,26 +178,21 @@ function listarAsignaturasEstudiante()
   $sentence->execute();
   $result = $sentence->fetchAll();
 
-  return $result;
-  //$filas = "";
+  //return $result;
+  $filas= "";
 
-  // foreach ($result as $res) {
-  //   $filas .=
-  //   '
-  //       <div class="col-lg-3 col-6">
-  //         <!-- small box -->
-  //         <div class="small-box bg-info">
-  //         <div class="inner">
-  //             <h3>150</h3>
+  foreach ($result as $res) {
+    $filas .=
+    '
+          <div class="inner">
+              <h3>150</h3>
 
-  //             <p>'.$res['nom_asig'].'</p>
-  //         </div>
-  //         <div class="icon">
-  //             <i class="ion ion-person-add"></i>
-  //           </div>
-  //         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-  //       </div>
-  //     </div>';
-  // }
-  // return $filas;
+              <p>'.$res['nom_asig'].'</p>
+          </div>
+          <div class="icon">
+              <i class="ion ion-person-add"></i>
+          </div>
+          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>';
+  }
+  return $filas;
 }

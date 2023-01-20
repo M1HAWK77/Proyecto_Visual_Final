@@ -10,7 +10,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
     if ($_SESSION['rol'] == '') {
         header("location:index.php"); //me da problemas y me muestra que la pagina no esta disponible
     } else {
-        echo ("existe el usuario " . $_SESSION['user'] . " y se ha definido como " . $_SESSION['rol'] . ' CabeceraGeneral->'.$_SESSION['cedula']);
+        echo ("existe el usuario " . $_SESSION['user'] . " y se ha definido como " . $_SESSION['rol'] . ' CabeceraGeneral->' . $_SESSION['cedula']);
         if ($_SESSION['rol'] == 'admin') {
         }
     }
@@ -31,8 +31,9 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
                 //alert("funcionaaa");
                 var user = (<?php echo json_encode($_SESSION['user']); ?>); //guuardar la variable en jquery con variables de sesion
                 var rol = (<?php echo json_encode($_SESSION['rol']); ?>); //guuardar la variable en jquery con variables de sesion
-                var usuarioId = (<?php echo json_encode($_SESSION['cedula']); ?>);//Agrege 16/01/2023 para ver si se arrregla lo de las variables de session
-                $("#usuario").text(user);
+                var usuarioId = (<?php echo json_encode($_SESSION['cedula']); ?>); //Agrege 16/01/2023 para ver si se arrregla lo de las variables de session
+                //$("#usuario").text(user);
+                $(".usuario").text(user);
                 $("#salir").click(function() {
 
                     $.post("validaciones.php", {
@@ -97,20 +98,40 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
                 <ul class="navbar-nav ml-auto">
                     <!-- Navbar Search -->
 
-
-                    <!-- Messages Dropdown Menu -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="fas fa-times"></i>
-                            <span class="badge badge-danger navbar-badge"></span>
+                    <!-- User  controls -->
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <span class="hidden-xs usuario">Alexander Pierce</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <a href="#" class="dropdown-item">
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <button type="submit" class="btn btn-default" id="salir">Log out</button>
-                        </div>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                                <p class='usuario'>
+                                    Nombre del usuario
+                                </p>
+                            </li>
+                            <!-- Menu Body -->
+                            <li class="user-body">
+
+                                <!-- /.row -->
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-right">
+                                    <a  class="btn btn-default btn-flat" id="salir">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
                     </li>
+                    <!-- Control Sidebar Toggle Button -->
+                    <li>
+                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    </li>
+                    <!-- end user controls -->
                 </ul>
             </nav>
             <!-- /.navbar -->
@@ -130,7 +151,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
                             <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-3" alt="User Image">
                         </div>
                         <div class="info">
-                            <a href="#" class="d-block" id="usuario">Alexander Pierce</a>
+                            <a href="#" class="d-block usuario" id="usuarioid">Alexander Pierce</a>
                         </div>
                     </div>
 

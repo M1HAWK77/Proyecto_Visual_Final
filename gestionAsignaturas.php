@@ -14,31 +14,31 @@
         $("#addAsignatura").click(function() {
             $("#modalCrudAddAsignatura").modal("show");
         }); 
-
+        
         $(".editarAsignatura").click(function() {
             fila = $(this).closest("tr"); //captura la fila
             asigId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
-            $("#eidAsignatura").val(fila.find('td:eq(1)').text());
+            $("#eNomAsignatura").val(fila.find('td:eq(1)').text());
             $("#modalCrudEditAsignatura").modal("show");
-
+            
         });
-
+        
         $(".borrarAsignatura").click(function() {
             fila = $(this).closest("tr"); //captura la fila
             asigId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             $("#txtDel").text('Confirmación para eliminar Asignatura');
             $("#modalCrudBorrar").modal("show");
-
+            
         });
-
-
+        
+        
         //Agregar
         $("#formAgregarAsignatura").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
             idA = $("#idAsignatura").val();//si lo borro se pudre el crud de agregar, pero en realidad no tiene funcionalidad
             nombreA = $("#nombreAsignatura").val();
             //select
-            docSelect=$("#eSeleccion").val();
+            docSelect=$("#aSeleccion").val();
             opcion = 7;
             //alert(idA+ nombreA);
             
@@ -55,42 +55,40 @@
                 success: function(resultado) {
                     //aler(resultado);
                     location.reload();
-
+                    
                 }
-
+                
             });
-
+            
         });
         //Editar
-
+        
         $("#formEditarAsignatura").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
-
-            e.preventDefault(); //evita que el formulario mande todo hacia el servidor
-            idA = $("#eidAsignatura").val();
-            nombreA = $("#enombreAsignatura").val();
-            //docSelected= $("#eseleccion").val
-            opcion = 8;
-            alert(idA+ nombreA);
             
+            e.preventDefault(); //evita que el formulario mande todo hacia el servidor
+            nombreA = $("#eNomAsignatura").val();
+            docSelect=$("#eSeleccion").val();
+            opcion = 8;
+
             $.ajax({
                 url: "validaciones.php",
                 type: "POST",
                 data: {
-                    idAsig: idA,
                     nomA: nombreA,
-                    curPer: valor,
+                    docAsi: docSelect,
+                    idAsig: asigId,
                     opcion: opcion
                 },
                 success: function(resultado) {
                     location.reload();
-
+                    
                 }
-
+                
             });
-
+            
         });
-
-         //Borrar
+        
+        //Borrar
          $("#formBorrar").submit(function(e) { //variable cualquiera que coloco
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
             opcion = 9;

@@ -95,7 +95,7 @@
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="card" style="width: 18rem;">
-                        <img src="dist/img/user2-160x160.jpg" class="card-img-top" alt="...">
+                        <img src="img/usuImg/spidi.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="card-text">Estimado estudiante, en esta seccion podra editar sus datos</p>
                             <button id="edit" type="button" class="btn btn-outline-success">Editar</button>
@@ -138,7 +138,7 @@
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
                                 </div>
-                                <a href="gestionEstudiantes.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="matriculaEstudiante.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -149,16 +149,16 @@
                 <!-- aqui termina  -->
             </div>
 
-            
+
             <?php
             //include("consultas.php");
             //echo listarAsignaturasEstudiante();
             ?>
-            
+
             <div class="row">
-                <div class="col-lg-3 col-6"> 
-            <!-- small box -->
-            <div class="small-box bg-info">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
                         <div class="inner">
                             <h3>150</h3>
 
@@ -167,13 +167,13 @@
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="gestionEstudiantes.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
                         <div class="inner">
                             <h3>44</h3>
 
@@ -182,7 +182,7 @@
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="gestionDocentes.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>

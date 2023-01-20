@@ -119,9 +119,11 @@ if (isset($_POST['opcion']) && $_POST['opcion'] == 7 ){
 if (isset($_POST['opcion']) && $_POST['opcion'] == 8 ){
 
     $con = conectar();
-    $query = "UPDATE asignaturas SET id_asig=?, nom_asig=?, where id_cur_per=?";
+    //$query = "UPDATE asignaturas SET id_asig=?, nom_asig=?, where id_cur_per=?";
+    $query = "UPDATE asignaturas SET nom_asig=?, docente_asi=? WHERE id_asig=?";
     $sentence = $con->prepare($query);
-    $sentence->execute(array($_POST['idAsig'], $_POST['nomA'], $_POST['curPer']));
+    //$sentence->execute(array($_POST['idAsig'], $_POST['nomA'], $_POST['curPer']));
+    $sentence->execute(array($_POST['nomA'],  $_POST['docAsi'] ,$_POST['idAsig']));
 
 }
 
