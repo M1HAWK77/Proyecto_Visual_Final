@@ -157,10 +157,44 @@ function datosEstudiante()
         <td>' . $res['ape1_usu'] . ' ' . $res['ape2_usu'] . '</td>
         <td>' . $res['mail_usu'] . '</td>
         <td>' . $res['dir_usu'] . '</td>
-        <td><span class="badge bg-danger">55%</span></td>
+
     </tr>
     </tbody>';
   }
+  return $filas;
+}
+
+
+function asignaturasEstudianteNoMatriculado()
+{
+  $con = conectar();
+  $query = "SELECT * FROM asignaturas"; 
+  // "SELECT a.*
+  // FROM asignaturas a, detalle_asignaturas d, usuarios u
+  // WHERE
+  // a.id_asig <> d.id_asi_per AND
+  // d.ced_usu_det = ?";
+  $sentence = $con->prepare($query);
+  // $sentence->execute(array($_SESSION['cedula']));
+  $sentence->execute();
+  $result = $sentence->fetchAll();
+
+  $filas="";
+
+  foreach($result as $res){
+    $filas .=
+    '<tbody> 
+    <tr>
+      <td>' . $res['id_asig'] . '</td>
+      <td>' . $res['nom_asig'] . '</td>
+      <td>
+        <button type="button" class="btn btn-default matricularse" ><i class="fas fa-pencil-alt"></i>Matricularse</button>
+      </td>
+
+    <tr>
+    </tbody>' ;
+  }
+
   return $filas;
 }
 

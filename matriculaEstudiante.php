@@ -1,64 +1,30 @@
-<?php include("cabeceraEstudiantes.php");?>
+<?php include("cabeceraEstudiantes.php"); ?>
 <!-- incluyo script de prueba para modal -->
 <script src="JqueryLib.js"></script>
 
 <script>
     $(document).ready(function() {
-        var usuario_id = "";
+        var matricula_id = "";
         var opcion;
 
-        $("#upload").click(function() {
-            $("#modalSubirArchivos").modal("show");
-        });
-
         // puedo acceder a las class de otras clases
-        $("#edit").click(function() {
+        $(".matricularse").click(function() {
             fila = $(this).closest("tr"); //captura la fila
-            usuario_id = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
-            usuario_nombre = fila.find('td:eq(1)').text();
-            $("#nombreUsuario").val(usuario_nombre);
-            $("#modalCrudEditar").modal('show');
-
-        });
-
-        //control del submit
-        $("#formUsuariosEditar").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
-            e.preventDefault(); //evita que el formulario mande todo hacia el servidor
-            var usuarioId = (<?php echo json_encode($_SESSION['cedula']); ?>);
-            pNombre = $("#primerNombre").val();
-            sNombre = $("#segundoNombre").val();
-            pApellido = $("#apellidoPaterno").val();
-            sApellido = $("#apellidoMaterno").val();
-            correo = $("#correo").val();
-            direccion = $("#direccion").val();
-            // Nueva funcion desde aqui
-            fileImg = $("#imgUser").val();
-
-            // Nueva funcion desde aqui FIN
-            opcion = 1;
-
-            // var arraySeparadorCadena = nombreUsuario.split(" ");
-            // alert(arraySeparadorCadena);
+            matricula_id = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             $.ajax({
                 url: "validaciones.php",
                 type: "POST",
                 data: {
-                    usuario_id: usuarioId,
-                    nom1: pNombre,
-                    nom2: sNombre,
-                    ape1: pApellido,
-                    ape2: sApellido,
-                    cor: correo,
-                    dir: direccion,
-                    opcion: opcion
+                    idM: matricula_id,
+                    opcion: "matricular"
                 },
                 success: function(resultado) {
+                    alert(resultado);
                     location.reload();
 
                 }
 
             });
-
         });
 
     });
@@ -85,30 +51,36 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+    <br><br>
 
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
+
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="" style="width: 18rem;">
+                        <img src="img/EscudoUta.png" class="card-img-top" alt="...">
+
+                    </div>
+                </div>
+
                 <!-- aqui inicia  -->
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
-                                <th style="width: 10px">Cedula</th>
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>Correo electronico</th>
-                                <th>Direccion</th>
-                                <th style="width: 40px">Label</th>
-
+                                <th style="width: 400px">Id </th>
+                                <th>Materia</th>
+                                <th>Opciones</th>
                             </tr>
                         </thead>
 
                         <?php
                         include("consultas.php");
-                        echo datosEstudiante();
+                        echo asignaturasEstudianteNoMatriculado();
                         ?>
                     </table>
                 </div>

@@ -113,7 +113,7 @@
                                 <th>Apellidos</th>
                                 <th>Correo electronico</th>
                                 <th>Direccion</th>
-                                <th style="width: 40px">Label</th>
+                                
 
                             </tr>
                         </thead>
