@@ -19,9 +19,12 @@
                     opcion: "matricular"
                 },
                 success: function(resultado) {
-                    alert(resultado);
-                    location.reload();
-
+                    if(resultado==false){
+                        alert("El estudiantes ya se encuentra matriculado en esta materia")
+                    }else{
+                        alert("Matricula Exitosa")
+                        location.reload();
+                    }
                 }
 
             });

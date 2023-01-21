@@ -29,12 +29,8 @@
             direccion = $("#direccion").val();
             // Nueva funcion desde aqui
             fileImg=$("#imgUser").val();    
-
             // Nueva funcion desde aqui FIN
             opcion = 1;
-
-            // var arraySeparadorCadena = nombreUsuario.split(" ");
-            // alert(arraySeparadorCadena);
             $.ajax({
                 url: "validaciones.php",
                 type: "POST",
@@ -56,6 +52,17 @@
             });
 
         });
+
+
+        $(".asignaturaSeleccionada").click(function(){
+
+            alert("aplasto xd");
+            var idAsig=$(".asignaturaSeleccionada").attr("value");
+            alert(idAsig);
+            window.open("asignaturaDocente.php?id="+idAsig+"", "_self"); //hace que no se abra otra pestaña
+
+        });
+
 
     });
 </script>
@@ -109,7 +116,6 @@
                                 <th>Apellidos</th>
                                 <th>Correo electronico</th>
                                 <th>Direccion</th>
-                                <th style="width: 40px">Label</th>
 
                             </tr>
                         </thead>
@@ -124,37 +130,16 @@
                 <!-- aqui termina  -->
             </div>
 
-            <div class="row">
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>150</h3>
-
-                            <p>Materias</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add"></i>
-                        </div>
-                        <a href="gestionEstudiantes.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <?php
+                        echo listarAsignaturasDocente();
+                        ?>
                     </div>
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>44</h3>
-
-                            <p>Deberes</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add"></i>
-                        </div>
-                        <a href="gestionDocentes.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-            </div>
+            </section>
 
             <?php include("modalEditar.php"); ?>
             <?php include("modalBorrar.php"); ?>

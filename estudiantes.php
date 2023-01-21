@@ -6,6 +6,9 @@
     $(document).ready(function() {
         var usuario_id = "";
         var opcion;
+        // recoger valores de la tabla para img -- aun nio funciona
+        // fila = $(this).closest("tr"); //captura la fila
+        // imageUsu = fila.find('td:eq(5)').text();
 
         $("#upload").click(function() {
             $("#modalSubirArchivos").modal("show");
@@ -33,7 +36,6 @@
             direccion = $("#direccion").val();
             // Nueva funcion desde aqui
             fileImg = $("#imgUser").val();
-
             // Nueva funcion desde aqui FIN
             opcion = 1;
 
@@ -61,6 +63,16 @@
 
         });
 
+        // alert(imageUsu); AQUI ES PARA QUE APAREZCA LA IMAGEN
+        // replaceImg='<img id="picture" src="'+imageUsu+'" class="card-img-top" alt="...">'
+        // $("#picture").replaceWith(replaceImg);
+        //Control para cambio de img segun el usuario
+        // $("#picture").on('change',function() {         
+        //     fila = $(this).closest("tr"); //captura la fila
+        //     imageUsu = fila.find('td:eq(5)').text();
+        //     //$("#picture").replaceWith('<img id="picture" src="img/usuImg/spidi.jpg" class="card-img-top" alt="...">');
+        // });
+
     });
 </script>
 
@@ -73,7 +85,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Curso al que pertenece</h1>
+                    <h1 class="m-0">UNIVERSIDAD DE LA VIDA</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -95,7 +107,7 @@
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="card" style="width: 18rem;">
-                        <img src="img/usuImg/spidi.jpg" class="card-img-top" alt="...">
+                        <img id="picture" src="img/usuImg/spidi.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="card-text">Estimado estudiante, en esta seccion podra editar sus datos</p>
                             <button id="edit" type="button" class="btn btn-outline-success">Editar</button>
@@ -113,7 +125,8 @@
                                 <th>Apellidos</th>
                                 <th>Correo electronico</th>
                                 <th>Direccion</th>
-                                
+                                <th style="visibility:collapse; display:none;">ruta img</th>
+
 
                             </tr>
                         </thead>
@@ -129,14 +142,14 @@
                     <div class="row">
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-info">
+                            <div class="small-box bg-danger">
                                 <div class="inner">
-                                    <h3>150</h3>
+                                    <h3>UTA</h3>
 
-                                    <p>Matricularse</p>
+                                    <p>Matriculas</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-person-add"></i>
+                                    <i class="ion ion-pie-graph"></i>
                                 </div>
                                 <a href="matriculaEstudiante.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
@@ -150,42 +163,17 @@
             </div>
 
 
-            <?php
-            //include("consultas.php");
-            //echo listarAsignaturasEstudiante();
-            ?>
 
-            <div class="row">
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>150</h3>
-
-                            <p>Materias</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <?php
+                        echo listarAsignaturasEstudiante();
+                        ?>
                     </div>
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>44</h3>
-
-                            <p>Deberes</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-            </div>
+            </section>
 
             <?php include("modalEditar.php"); ?>
             <?php include("modalBorrar.php"); ?>

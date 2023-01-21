@@ -157,6 +157,7 @@ function datosEstudiante()
         <td>' . $res['ape1_usu'] . ' ' . $res['ape2_usu'] . '</td>
         <td>' . $res['mail_usu'] . '</td>
         <td>' . $res['dir_usu'] . '</td>
+        <td style="visibility:collapse; display:none;">' . $res['img_usu'] . '</td>
 
     </tr>
     </tbody>';
@@ -164,18 +165,22 @@ function datosEstudiante()
   return $filas;
 }
 
+function fotoUsuario()
+{
+  $con = conectar();
+  $query = "SELECT img_usu FROM usuarios WHERE ced_usu=?";
+  $sentence = $con->prepare($query);
+  $sentence->execute(array($_SESSION['cedula']));
+  $result = $sentence->fetch();
+  return $result['img_usu'];
+}
+
 
 function asignaturasEstudianteNoMatriculado()
 {
   $con = conectar();
   $query = "SELECT * FROM asignaturas"; 
-  // "SELECT a.*
-  // FROM asignaturas a, detalle_asignaturas d, usuarios u
-  // WHERE
-  // a.id_asig <> d.id_asi_per AND
-  // d.ced_usu_det = ?";
   $sentence = $con->prepare($query);
-  // $sentence->execute(array($_SESSION['cedula']));
   $sentence->execute();
   $result = $sentence->fetchAll();
 
@@ -201,15 +206,17 @@ function asignaturasEstudianteNoMatriculado()
 function listarAsignaturasEstudiante()
 {
   $con = conectar();
-  // $query = "SELECT asignaturas.nom_asig FROM asignaturas INNER JOIN
-  //           detalle_asignaturas ON asignaturas.id_asig=detalle_asignaturas.id_det_asig WHERE  detalle_asignaturas.ced_usu_det=?";
+  //Consulta original
+  // $query = "SELECT asignaturas.nom_asig FROM asignaturas,  detalle_asignaturas WHERE  asignaturas.id_asig=detalle_asignaturas.id_asi_per AND
+  //             detalle_asignaturas.ced_usu_det=?";
 
-  $query = "SELECT asignaturas.nom_asig FROM asignaturas,  detalle_asignaturas WHERE  asignaturas.id_asig=detalle_asignaturas.id_asi_per AND
-              detalle_asignaturas.ced_usu_det='1802'";
+  //consulta para tener hasta el id
+  $query = "SELECT asignaturas.* FROM asignaturas,  detalle_asignaturas WHERE  asignaturas.id_asig=detalle_asignaturas.id_asi_per AND
+              detalle_asignaturas.ced_usu_det=?";
 
   $sentence = $con->prepare($query);
-  //$sentence->execute(array($_SESSION['cedula']));
-  $sentence->execute();
+  $sentence->execute(array($_SESSION['cedula']));
+  //$sentence->execute();
   $result = $sentence->fetchAll();
 
   //return $result;
@@ -218,15 +225,74 @@ function listarAsignaturasEstudiante()
   foreach ($result as $res) {
     $filas .=
     '
-          <div class="inner">
-              <h3>150</h3>
+    <div class="col-12 col-sm-6 col-md-3">
+    <div class="info-box">
+        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
 
-              <p>'.$res['nom_asig'].'</p>
-          </div>
-          <div class="icon">
-              <i class="ion ion-person-add"></i>
-          </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>';
+        <div class="info-box-content">
+            <span class="info-box-text" value="'.$res['id_asig'].'">'.$res['nom_asig'].'</span>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+        <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+</div>';
   }
+  return $filas;
+}
+
+function listarAsignaturasDocente(){
+
+  $con = conectar();
+  $query = "SELECT * FROM asignaturas WHERE docente_asi=?";
+  $sentence = $con->prepare($query);
+  $sentence->execute(array($_SESSION['cedula']));
+  $result = $sentence->fetchAll();
+  $filas= "";
+
+  foreach ($result as $res) {
+    $filas .=
+    '
+    <div class="col-12 col-sm-6 col-md-3">
+    <div class="info-box">
+        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+        <div class="info-box-content">
+            <span class="info-box-text idAsigDoc">'.$res['nom_asig'].'</span>
+            <a value="'.$res['id_asig'].'" class="small-box-footer asignaturaSeleccionada">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+        <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+</div>';
+  }
+  return $filas;
+
+}
+
+function listarEstudiantesPertencenAsignatura()
+{
+  $con = conectar();
+  $query = "SELECT u.* FROM usuarios u, detalle_asignaturas d WHERE d.id_asi_per=1 AND u.ced_usu=d.ced_usu_det";
+  $sentence = $con->prepare($query);
+  // $sentence->execute(array($_SESSION['cedula']));
+  $sentence->execute();
+  $result = $sentence->fetchAll();
+  $filas= "";
+
+  foreach ($result as $res) {
+    $filas .= '
+        <tbody>
+          <tr>
+            <td><a href="#">' . $res['ced_usu'] . '</a></td>
+            <td>' . $res['nom1_usu'] . ' ' . $res['nom2_usu'] . ' ' . $res['ape1_usu'] . ' ' . $res['ape2_usu'] . '</td>
+            <td><span class="badge badge-success">' . $res['mail_usu'] . '</span></td>
+            <td>
+            <div class="sparkbar" data-color="#00a65a" data-height="20">' . $res['dir_usu'] . '</div>
+            </td>
+
+          </tr>';
+  }
+
   return $filas;
 }

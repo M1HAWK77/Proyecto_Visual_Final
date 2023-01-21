@@ -14,7 +14,7 @@ if(!isset($_SESSION))
         session_destroy();
         session_start(); 
     }
-    echo("existe el usuario " .$_SESSION['user']. " y se ha definido como " . $_SESSION['rol']);
+    //echo("existe el usuario " .$_SESSION['user']. " y se ha definido como " . $_SESSION['rol']);
 
 //Inicio validar usuario login.php
 if (isset($_POST['mail'])) {
@@ -144,23 +144,23 @@ if (isset($_POST['opcion']) && $_POST['opcion'] == 9 ){
 //inicio Matricularse
 if (isset($_POST['opcion']) && $_POST['opcion'] == "matricular" ){
     $con = conectar();
-    //consulta para ver si el ESTUDIANTE esta matriculado en dicha materia
+    //query para verificar si el estudiante existe en esa materia
     $verificar = "SELECT ced_usu_det FROM detalle_asignaturas WHERE id_asi_per=? AND ced_usu_det=?";
     $resultadoVerificar= $con->prepare($verificar);
     $resultadoVerificar->execute(array($_POST['idM'],$_SESSION['cedula']));
-    $resultadoVerificar->fetch();
-    echo ($resultadoVerificar['ced_usu_det']);
+    $res=$resultadoVerificar->fetch();
 
-    if($resultadoVerificar == $_SESSION['cedula']){
-        echo ("<script> alert(El usuario se encuentra registrado en esta materia);</select>");
+    if($res['ced_usu_det'] == $_SESSION['cedula']){
+        echo false;
     }else {
         $query = "INSERT INTO detalle_asignaturas SET ced_usu_det=?, id_asi_per=?";
         $sentence = $con->prepare($query);
         $sentence->execute(array($_SESSION['cedula'], $_POST['idM']));
+        echo true;
     }
 
 }
-//Fin borrar Asignatura
+//Fin Matricularse
 
 
 

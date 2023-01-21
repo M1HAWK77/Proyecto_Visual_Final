@@ -176,7 +176,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="materiasEstudiantes.php" class="nav-link">
+                                        <a href="#" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Materias</p>
                                         </a>
