@@ -1,4 +1,4 @@
-<?php include("cabeceraAdmin.php") ?>
+<?php include("cabeceraDocente.php") ?>
 
 <script src="JqueryLib.js"></script>
 <!-- //Script para el texto giga prosito -->
@@ -17,6 +17,35 @@
         var arrayCad = urlCursos.split('=');
         var valor = arrayCad[1];
         alert(valor);
+
+           //SUBIR ARCHIVOS
+           $("#UploadDeber").click(function() { //variable cualquiera que coloco
+            var fd = new FormData();
+            var files = $('#fileDeber')[0].files[0];
+            fd.append('fileDeber', files);
+            // AJAX request
+
+            $.ajax({
+                url: 'validarDeberes.php',
+                type: 'post',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response != 0) {
+                        // Show image preview
+                        alert("Documento subido: " + response);
+                        //$('#imgUsu').text(response);
+                        ruta = response;
+                    } else {
+                        alert('file not uploaded');
+                    }
+                }
+            });
+        });
+
+
+
     });
 </script>
 
@@ -58,35 +87,26 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="form-group">
-                                <textarea id="compose-textarea" class="form-control" style="height: 300px">
-                        <h1><u>Deber</u></h1>
-                        <h4>Queridos estudiantes</h4>
-                        <p>Por favor entregar el deber a tiempo</p>
-                        <ul>
-                        <li>CALIFICACIONES</li>
-                        <li>10</li>
-                        <li>5</li>
-                        <li>0</li>
-                        </ul>
-                        <p>Thank you,</p>
-                        <p>El profe</p>
-                    </textarea>
+                                <input class="form-control" placeholder="Nombre De La Actividad:">
                             </div>
                             <div class="form-group">
-                                <div class="btn btn-default btn-file">
-                                    <i class="fas fa-paperclip"></i> Attachment
-                                    <input type="file" name="attachment">
-                                </div>
-                                <p class="help-block">Max. 32MB</p>
+                                <input class="form-control" placeholder="Descripción:">
+                            </div>
+                            <div class="form-group">
+                                <textarea id="compose-textarea" class="form-control" style="height: 300px">
+                                </textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" id="fileDeber" name="fileDeber" class="form-control"> 
+                                <br><br>
+                                <p class="help-block">El limite lo pones tu crack</p>
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <div class="float-right">
-                                <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Draft</button>
-                                <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
+                                <button type="button" id="UploadDeber" value="UploadDeber" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
                             </div>
-                            <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>
                         </div>
                         <!-- /.card-footer -->
                     </div>

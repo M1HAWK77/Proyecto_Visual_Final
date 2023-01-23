@@ -63,6 +63,16 @@
 
         });
 
+
+        
+        $(".asignaturaSeleccionada").click(function(){
+            fila = $(this).closest("tr"); //captura la fila
+            idAsig = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
+            window.open("#.php?id="+idAsig+"", "_self"); //hace que no se abra otra pestaña
+
+        });
+
+
         // alert(imageUsu); AQUI ES PARA QUE APAREZCA LA IMAGEN
         // replaceImg='<img id="picture" src="'+imageUsu+'" class="card-img-top" alt="...">'
         // $("#picture").replaceWith(replaceImg);
@@ -165,14 +175,18 @@
 
 
             <section class="content">
-                <div class="container-fluid">
-                    <!-- Info boxes -->
-                    <div class="row">
-                        <?php
-                        echo listarAsignaturasEstudiante();
-                        ?>
-                    </div>
-                </div>
+                <!-- here  -->
+                <table class="table table-sm table-borderless  ">
+                    <thead >
+                        <tr>
+                            <th><h2> Asignaturas </h2></th>
+                        </tr>
+                    </thead>
+
+                    <?php
+                    echo listarAsignaturasEstudiante();
+                    ?>
+                </table>
             </section>
 
             <?php include("modalEditar.php"); ?>

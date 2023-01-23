@@ -157,8 +157,7 @@ function datosEstudiante()
         <td>' . $res['ape1_usu'] . ' ' . $res['ape2_usu'] . '</td>
         <td>' . $res['mail_usu'] . '</td>
         <td>' . $res['dir_usu'] . '</td>
-        <td style="visibility:collapse; display:none;">' . $res['img_usu'] . '</td>
-
+        <td style="visibility:collapse; display:none;">' . $res['img_usu'] . '</td>     
     </tr>
     </tbody>';
   }
@@ -203,6 +202,7 @@ function asignaturasEstudianteNoMatriculado()
   return $filas;
 }
 
+//es lo mismo que docentes, listar con divs, no funciona arreglar como la de abajo mi so 
 function listarAsignaturasEstudiante()
 {
   $con = conectar();
@@ -224,59 +224,58 @@ function listarAsignaturasEstudiante()
 
   foreach ($result as $res) {
     $filas .=
-    '
-    <div class="col-12 col-sm-6 col-md-3">
-    <div class="info-box">
-        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
-
-        <div class="info-box-content">
-            <span class="info-box-text" value="'.$res['id_asig'].'">'.$res['nom_asig'].'</span>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-        <!-- /.info-box-content -->
+    '<tbody>
+  <tr>
+    <td style="visibility:collapse; display:none;">'.$res['id_asig'].'</td>
+    <td> 
+    <div class="">
+    <button type="button" class="btn btn-block btn-outline-primary asignaturaSeleccionada"><i class="fas fa-pencil-alt"></i> ' .$res['nom_asig']. ' </button>
     </div>
-    <!-- /.info-box -->
-</div>';
-  }
-  return $filas;
+
+    </td>
+  </tr>
+  </tbody>';
+}
+return $filas;      
 }
 
-function listarAsignaturasDocente(){
 
-  $con = conectar();
-  $query = "SELECT * FROM asignaturas WHERE docente_asi=?";
-  $sentence = $con->prepare($query);
-  $sentence->execute(array($_SESSION['cedula']));
-  $result = $sentence->fetchAll();
-  $filas= "";
+function listarAsignaturasDocente()
+{
 
-  foreach ($result as $res) {
-    $filas .=
-    '
-    <div class="col-12 col-sm-6 col-md-3">
-    <div class="info-box">
-        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+    $con = conectar();
+    $query = "SELECT * FROM asignaturas WHERE docente_asi=?";
+    $sentence = $con->prepare($query);
+    $sentence->execute(array($_SESSION['cedula']));
+    $result = $sentence->fetchAll();
+    $filas= "";
 
-        <div class="info-box-content">
-            <span class="info-box-text idAsigDoc">'.$res['nom_asig'].'</span>
-            <a value="'.$res['id_asig'].'" class="small-box-footer asignaturaSeleccionada">More info <i class="fas fa-arrow-circle-right"></i></a>
+    foreach ($result as $res) {
+      $filas .=
+        '<tbody>
+      <tr>
+        <td style="visibility:collapse; display:none;">'.$res['id_asig'].'</td>
+
+        <td> 
+        <div class="">
+        <button type="button" class="btn btn-block btn-outline-primary asignaturaSeleccionada"><i class="fas fa-pencil-alt"></i> ' .$res['nom_asig']. ' </button>
         </div>
-        <!-- /.info-box-content -->
-    </div>
-    <!-- /.info-box -->
-</div>';
-  }
-  return $filas;
+    
+        </td>
 
+      </tr>
+      </tbody>';
+    }
+  return $filas;      
 }
 
-function listarEstudiantesPertencenAsignatura()
+function listarEstudiantesPertencenAsignatura($id)
 {
   $con = conectar();
-  $query = "SELECT u.* FROM usuarios u, detalle_asignaturas d WHERE d.id_asi_per=1 AND u.ced_usu=d.ced_usu_det";
+  $query = "SELECT u.* FROM usuarios u, detalle_asignaturas d WHERE d.id_asi_per=? AND u.ced_usu=d.ced_usu_det";
   $sentence = $con->prepare($query);
   // $sentence->execute(array($_SESSION['cedula']));
-  $sentence->execute();
+  $sentence->execute(array($id));
   $result = $sentence->fetchAll();
   $filas= "";
 

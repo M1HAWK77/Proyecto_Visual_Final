@@ -1,4 +1,4 @@
-<?php include("cabeceraEstudiantes.php") ?>
+<?php include("cabeceraDocente.php") ?>
 <!-- incluyo script de prueba para modal -->
 <script src="JqueryLib.js"></script>
 
@@ -16,6 +16,12 @@
             $("#modalCrudEditar").modal('show');
 
         });
+
+        
+        $("#upload").click(function() {
+            $("#modalSubirArchivos").modal("show");
+        });
+
 
         //control del submit
         $("#formUsuariosEditar").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
@@ -55,10 +61,8 @@
 
 
         $(".asignaturaSeleccionada").click(function(){
-
-            alert("aplasto xd");
-            var idAsig=$(".asignaturaSeleccionada").attr("value");
-            alert(idAsig);
+            fila = $(this).closest("tr"); //captura la fila
+            idAsig = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             window.open("asignaturaDocente.php?id="+idAsig+"", "_self"); //hace que no se abra otra pestaña
 
         });
@@ -95,13 +99,13 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <!-- ./col -->
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-3 col-4">
                     <!-- small box -->
-                    <div class="card" style="width: 18rem;">
+                    <div class="card" style="width: 14rem;">
                         <img src="dist/img/user8-128x128.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text">Estimado Docente, en esta seccion podra editar sus datos</p>
-                            <button id="edit" type="button" class="btn btn-outline-success">Editar</button>
+                            <p class="card-text"></p>
+                            <button id="edit" type="button" class="btn btn-outline-success">Editar Datos</button>
                         </div>
                     </div>
                 </div>
@@ -131,18 +135,24 @@
             </div>
 
             <section class="content">
-                <div class="container-fluid">
-                    <!-- Info boxes -->
-                    <div class="row">
+                <!-- here  -->
+                <table class="table table-sm table-borderless">
+                        <thead>
+                            <tr>
+                                <th> <h2> Asignaturas </h2></th>
+                            </tr>
+                        </thead>
+
                         <?php
                         echo listarAsignaturasDocente();
                         ?>
-                    </div>
-                </div>
+                    </table>
+
             </section>
 
             <?php include("modalEditar.php"); ?>
             <?php include("modalBorrar.php"); ?>
+            <?php include("modalSubirDocumento.php"); ?>
 
 
             <!-- FIN TABLE: LATEST ORDERS -->

@@ -1,4 +1,4 @@
-<?php include("cabeceraAdmin.php") ?>
+<?php include("cabeceraDocente.php") ?>
 
 <script src="JqueryLib.js"></script>
 
@@ -13,7 +13,7 @@
         // puedo acceder a las class de otras clases
         $("#goTareas").click(function() {
 
-            window.open("asignarTareasDocente.php?id="+valor+"");
+            window.open("asignarTareasDocente.php?id="+valor+"", "_self");
         });
 
     });
@@ -102,7 +102,11 @@
                                 </tr>
                             </thead>
                             <?php include_once('consultas.php');
-                            echo listarEstudiantesPertencenAsignatura();
+                            $host = $_SERVER["HTTP_HOST"];
+                            $url = $_SERVER["REQUEST_URI"];
+                            $string = strval($url);
+                            $id = explode("=", $string);
+                            echo listarEstudiantesPertencenAsignatura($id[1]);
                             ?>
                         </table>
                     </div>
