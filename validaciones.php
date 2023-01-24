@@ -162,6 +162,35 @@ if (isset($_POST['opcion']) && $_POST['opcion'] == "matricular" ){
 }
 //Fin Matricularse
 
+//Inicio de asignar deberes
+
+if (isset($_POST['opcion']) && $_POST['opcion'] == "upDeber") {
+
+    $con = conectar();
+    $query = "INSERT INTO actividades SET  nom_act=?, desc_act=?, instruccion_act=?, fec_entrega_act=?, estado_act='Enviado', id_asig_per=?";
+    $ejecutar= $con->prepare($query);
+    $ejecutar->execute(array($_POST['act'],$_POST['desAct'], $_POST['file'] ,$_POST['fecha'], $_POST['idAsignatura']));
+
+}
+//Fin de asignar deberes
+
+//Inicio de subir deberes Estudiante
+
+if (isset($_POST['opcion']) && $_POST['opcion'] == "upDeberEstudiante") {
+    
+    $con = conectar();
+    $query = "INSERT INTO detalle_actividades SET  id_usu_act=?, id_act_per=?, archivo_act=?";
+    $ejecutar= $con->prepare($query);
+    $ejecutar->execute(array($_SESSION['cedula'],$_POST['idAsignatura'], $_POST['file']));
+    
+}
+
+//Fin de subir deberes Estudiante
+
+
+
+
+
 
 
 //salir

@@ -295,3 +295,30 @@ function listarEstudiantesPertencenAsignatura($id)
 
   return $filas;
 }
+function listarTareas($id)
+{
+  $con = conectar();
+  $query = "SELECT * FROM actividades WHERE id_asig_per=?";
+  $sentence = $con->prepare($query);
+  $sentence->execute(array($id));
+  $result = $sentence->fetchAll();
+  $filas= "";
+
+  foreach ($result as $res) {
+    $filas .= '
+        <tbody>
+          <tr>
+            <td style="visibility:collapse; display:none;"><a href="#">' . $res['id_act'] . '</a></td>
+            <td>' . $res['nom_act'] . '</td>
+            <td><span class="badge">' . $res['desc_act'] . '</span></td>
+            <td><span class="badge badge-success">' . $res['fec_entrega_act'] . '</span></td>
+            <td><span class="badge badge-success">' . $res['estado_act'] . '</span></td>
+            <td><a class="btn btn-sm btn-warning" href="'.$res['instruccion_act'].'" download> Descargar Actividad! </td>
+            <td><a href="#" class="btn btn-sm btn-info float-left uploadDeber">Subir Actividad</a>
+              <a href="#" class="btn btn-sm btn-danger float-left Aceptar"> Aceptar</a>
+            </td>
+          </tr>';
+  }
+
+  return $filas;
+}

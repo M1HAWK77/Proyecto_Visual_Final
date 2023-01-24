@@ -68,7 +68,7 @@
         $(".asignaturaSeleccionada").click(function(){
             fila = $(this).closest("tr"); //captura la fila
             idAsig = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
-            window.open("#.php?id="+idAsig+"", "_self"); //hace que no se abra otra pestaña
+            window.open("asignaturaEstudiante.php?id="+idAsig+"", "_self"); //hace que no se abra otra pestaña
 
         });
 

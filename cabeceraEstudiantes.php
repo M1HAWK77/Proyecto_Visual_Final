@@ -148,7 +148,6 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-4 pb-4 mb-4 d-flex">
                         <div class="image">
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-3" alt="User Image">
                         </div>
                         <div class="info">
                             <a href="#" class="d-block usuario" id="usuarioid">Alexander Pierce</a>
