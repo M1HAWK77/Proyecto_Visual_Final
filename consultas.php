@@ -322,3 +322,34 @@ function listarTareas($id)
 
   return $filas;
 }
+
+function deberesRecibidos($id)
+{
+  $con = conectar();
+  // $query = "SELECT asignaturas.* FROM asignaturas,  detalle_asignaturas WHERE  asignaturas.id_asig=detalle_asignaturas.id_asi_per AND
+  //             detalle_asignaturas.ced_usu_det=?";
+  $query = "SELECT d.*, a.nom_act, u.* FROM detalle_actividades d, actividades a, usuarios u WHERE a.id_asig_per=? AND u.ced_usu=d.id_usu_act ";
+  $sentence = $con->prepare($query);
+  $sentence->execute(array($id));
+  $result = $sentence->fetchAll();
+  $filas= "";
+
+
+  foreach ($result as $res) {
+    $filas .= '
+        <tbody>
+          <tr>
+            <td style="visibility:collapse; display:none;"><a href="#">' . $res['id_det_act'] . '</a></td>
+            <td>' . $res['nom_act'] . '</td>
+            <td><span class="badge">'  . $res['nom1_usu'] . ' ' . $res['nom2_usu'] . ' ' . $res['ape1_usu'] . ' ' . $res['ape2_usu'] . '</span></td>
+            <td><span class="badge badge-success">' . $res['id_det_act'] . '</span></td>
+            <td><a class="btn btn-sm btn-warning" href="'.$res['archivo_act'].'" download> Descargar! </td>
+            <td>'.$res['calificacion'].'</td>
+            <td><a href="#" class="btn btn-sm btn-info float-left calificar">Calificar</a></td>
+            <td> <a href="#" class="btn btn-sm btn-danger float-left editar"> Editar Nota</a></td>
+          </tr>';
+  }
+
+  return $filas;
+
+}

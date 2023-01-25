@@ -187,6 +187,32 @@ if (isset($_POST['opcion']) && $_POST['opcion'] == "upDeberEstudiante") {
 
 //Fin de subir deberes Estudiante
 
+//Inicio de subir calificaciones
+
+if (isset($_POST['opcion']) && $_POST['opcion'] == "calificacion") {
+    
+    $con = conectar();
+    $query = "UPDATE detalle_actividades SET calificacion=? WHERE id_det_act=?";
+    $ejecutar= $con->prepare($query);
+    $ejecutar->execute(array($_POST['calf'], $_POST['idDeber']));
+    
+}
+
+//Fin  de subir calificaciones
+
+//Inicio de editar calificaciones
+
+if (isset($_POST['opcion']) && $_POST['opcion'] == "editarcalificacion") {
+    
+    $con = conectar();
+    $query = "UPDATE detalle_actividades SET calificacion=? WHERE id_det_act=?";
+    $ejecutar= $con->prepare($query);
+    $ejecutar->execute(array($_POST['calf'], $_POST['idDeber']));
+    
+}
+
+//Fin  de editar calificaciones
+
 
 
 
