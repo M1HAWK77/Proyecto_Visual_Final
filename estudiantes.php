@@ -4,11 +4,26 @@
 
 <script>
     $(document).ready(function() {
+
+        //Cargar Img
+        $.ajax({
+                url: "validaciones.php",
+                type: "POST",
+                data: {
+                    opcion: "foto"
+                },
+                success: function(resultado) {
+                    $("#picture").attr("src",resultado);
+                    
+                }
+
+            });
+
+        //Fin Cargar Img
+
         var usuario_id = "";
         var opcion;
-        // recoger valores de la tabla para img -- aun nio funciona
-        // fila = $(this).closest("tr"); //captura la fila
-        // imageUsu = fila.find('td:eq(5)').text();
+        var ruta="";
 
         $("#upload").click(function() {
             $("#modalSubirArchivos").modal("show");
@@ -19,7 +34,17 @@
             fila = $(this).closest("tr"); //captura la fila
             usuario_id = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             usuario_nombre = fila.find('td:eq(1)').text();
-            $("#nombreUsuario").val(usuario_nombre);
+            usuario_apellidos = fila.find('td:eq(2)').text();
+            var arraySeparadorCadena = usuario_nombre.split(" ");
+            var arraySeparadorCadenaA = usuario_apellidos.split(" ");
+
+            $("#primerNombre").val(arraySeparadorCadena[0]);
+            $("#segundoNombre").val(arraySeparadorCadena[1]);
+            $("#apellidoPaterno").val(arraySeparadorCadenaA[0]);
+            $("#apellidoMaterno").val(arraySeparadorCadenaA[1]);
+            $("#correo").val(fila.find('td:eq(3)').text());
+            $("#direccion").val(fila.find('td:eq(4)').text());
+            ruta=fila.find('td:eq(5)').text();
             $("#modalCrudEditar").modal('show');
 
         });
@@ -34,13 +59,8 @@
             sApellido = $("#apellidoMaterno").val();
             correo = $("#correo").val();
             direccion = $("#direccion").val();
-            // Nueva funcion desde aqui
-            fileImg = $("#imgUser").val();
-            // Nueva funcion desde aqui FIN
             opcion = 1;
 
-            // var arraySeparadorCadena = nombreUsuario.split(" ");
-            // alert(arraySeparadorCadena);
             $.ajax({
                 url: "validaciones.php",
                 type: "POST",
@@ -52,6 +72,7 @@
                     ape2: sApellido,
                     cor: correo,
                     dir: direccion,
+                    img: ruta,
                     opcion: opcion
                 },
                 success: function(resultado) {
@@ -73,15 +94,34 @@
         });
 
 
-        // alert(imageUsu); AQUI ES PARA QUE APAREZCA LA IMAGEN
-        // replaceImg='<img id="picture" src="'+imageUsu+'" class="card-img-top" alt="...">'
-        // $("#picture").replaceWith(replaceImg);
-        //Control para cambio de img segun el usuario
-        // $("#picture").on('change',function() {         
-        //     fila = $(this).closest("tr"); //captura la fila
-        //     imageUsu = fila.find('td:eq(5)').text();
-        //     //$("#picture").replaceWith('<img id="picture" src="img/usuImg/spidi.jpg" class="card-img-top" alt="...">');
-        // });
+            //SUBIR ARCHIVOS
+            $("#Upload").click(function() { //variable cualquiera que coloco
+            var fd = new FormData();
+            var files = $('#file')[0].files[0];
+            fd.append('file', files);
+            // AJAX request
+
+            $.ajax({
+                url: 'validarImg.php',
+                type: 'post',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response != 0) {
+                        // Show image preview
+                        alert("Imagen subida: " + response);
+                        $('#imgUsu').text(response);
+                        ruta = response;
+                    } else {
+                        alert('file not uploaded');
+                    }
+                }
+            });
+        });
+
+
+
 
     });
 </script>
@@ -120,7 +160,7 @@
                         <img id="picture" src="img/usuImg/spidi.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="card-text">Estimado estudiante, en esta seccion podra editar sus datos</p>
-                            <button id="edit" type="button" class="btn btn-outline-success">Editar</button>
+                            <button id="takePicture" type="button" class="btn btn-outline-info">Editar</button>
                         </div>
                     </div>
                 </div>
@@ -136,8 +176,7 @@
                                 <th>Correo electronico</th>
                                 <th>Direccion</th>
                                 <th style="visibility:collapse; display:none;">ruta img</th>
-
-
+                                <th> Editar Datos</th>
                             </tr>
                         </thead>
 

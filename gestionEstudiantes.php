@@ -13,7 +13,6 @@
             usuario_id = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             usuario_nombre = fila.find('td:eq(1)').text();
             var arraySeparadorCadena = usuario_nombre.split(" ");
-
             $("#nombreUsuario").text(usuario_nombre); //Cambio lo que estaba escrito por el argumento que mando
             $("#primerNombre").val(arraySeparadorCadena[0]);
             $("#segundoNombre").val(arraySeparadorCadena[1]);
@@ -22,7 +21,6 @@
             $("#correo").val(fila.find('td:eq(2)').text());
             $("#direccion").val(fila.find('td:eq(3)').text());
             $("#modalCrudEditar").modal('show');
-
         });
 
         $(".borrar").click(function() {

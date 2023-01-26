@@ -213,10 +213,20 @@ if (isset($_POST['opcion']) && $_POST['opcion'] == "editarcalificacion") {
 
 //Fin  de editar calificaciones
 
+//Traer imagen
 
+if (isset($_POST['opcion']) && $_POST['opcion'] == "foto") {
+    
+    $con = conectar();
+    $query = "SELECT img_usu FROM usuarios WHERE ced_usu=?";
+    $ejecutar= $con->prepare($query);
+    $ejecutar->execute(array($_SESSION['cedula']));
+    $traer = $ejecutar->fetch();
+    echo $traer['img_usu'];
+    
+}
 
-
-
+//Traer imagen
 
 
 //salir

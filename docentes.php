@@ -4,17 +4,46 @@
 
 <script>
     $(document).ready(function() {
+
+        //Cargar Img
+        $.ajax({
+                    url: "validaciones.php",
+                    type: "POST",
+                    data: {
+                        opcion: "foto"
+                    },
+                    success: function(resultado) {
+                        $("#usuImg").attr("src",resultado);
+                        //alert(resultado);
+                    }
+
+                });
+
+        //Fin Cargar Img    
+
+
+
         var usuario_id = "";
         var opcion;
+        var ruta="";
 
         // puedo acceder a las class de otras clases
         $("#edit").click(function() {
             fila = $(this).closest("tr"); //captura la fila
             usuario_id = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             usuario_nombre = fila.find('td:eq(1)').text();
-            $("#nombreUsuario").val(usuario_nombre);
-            $("#modalCrudEditar").modal('show');
+            usuario_apellidos = fila.find('td:eq(2)').text();
+            var arraySeparadorCadena = usuario_nombre.split(" ");
+            var arraySeparadorCadenaA = usuario_apellidos.split(" ");
 
+            $("#primerNombre").val(arraySeparadorCadena[0]);
+            $("#segundoNombre").val(arraySeparadorCadena[1]);
+            $("#apellidoPaterno").val(arraySeparadorCadenaA[0]);
+            $("#apellidoMaterno").val(arraySeparadorCadenaA[1]);
+            $("#correo").val(fila.find('td:eq(3)').text());
+            $("#direccion").val(fila.find('td:eq(4)').text());
+            ruta=fila.find('td:eq(5)').text();
+            $("#modalCrudEditar").modal('show');
         });
 
         
@@ -33,9 +62,6 @@
             sApellido = $("#apellidoMaterno").val();
             correo = $("#correo").val();
             direccion = $("#direccion").val();
-            // Nueva funcion desde aqui
-            fileImg=$("#imgUser").val();    
-            // Nueva funcion desde aqui FIN
             opcion = 1;
             $.ajax({
                 url: "validaciones.php",
@@ -48,6 +74,7 @@
                     ape2: sApellido,
                     cor: correo,
                     dir: direccion,
+                    img: ruta,
                     opcion: opcion
                 },
                 success: function(resultado) {
@@ -65,6 +92,33 @@
             idAsig = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
             window.open("asignaturaDocente.php?id="+idAsig+"", "_self"); //hace que no se abra otra pestaña
 
+        });
+
+        
+            //SUBIR ARCHIVOS
+            $("#Upload").click(function() { //variable cualquiera que coloco
+            var fd = new FormData();
+            var files = $('#file')[0].files[0];
+            fd.append('file', files);
+            // AJAX request
+
+            $.ajax({
+                url: 'validarImg.php',
+                type: 'post',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response != 0) {
+                        // Show image preview
+                        alert("Imagen subida: " + response);
+                        $('#imgUsu').text(response);
+                        ruta = response;
+                    } else {
+                        alert('file not uploaded');
+                    }
+                }
+            });
         });
 
 
@@ -102,10 +156,10 @@
                 <div class="col-lg-3 col-4">
                     <!-- small box -->
                     <div class="card" style="width: 14rem;">
-                        <img src="dist/img/user8-128x128.jpg" class="card-img-top" alt="...">
+                        <img id="usuImg" src="dist/img/user8-128x128.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="card-text"></p>
-                            <button id="edit" type="button" class="btn btn-outline-success">Editar Datos</button>
+                            <button id="takePictureD" type="button" class="btn btn-outline-success">Picture</button>
                         </div>
                     </div>
                 </div>
@@ -120,6 +174,7 @@
                                 <th>Apellidos</th>
                                 <th>Correo electronico</th>
                                 <th>Direccion</th>
+                                <th>Editar Datos</th>
 
                             </tr>
                         </thead>

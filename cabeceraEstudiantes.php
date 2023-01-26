@@ -28,6 +28,23 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
 
         <script>
             $(document).ready(function() {
+
+        //Cargar Img
+        $.ajax({
+                url: "validaciones.php",
+                type: "POST",
+                data: {
+                    opcion: "foto"
+                },
+                success: function(resultado) {
+                    $(".userImg").attr("src",resultado);
+                }
+
+            });
+
+        //Fin Cargar Img
+
+
                 //alert("funcionaaa");
                 var user = (<?php echo json_encode($_SESSION['user']); ?>); //guuardar la variable en jquery con variables de sesion
                 var rol = (<?php echo json_encode($_SESSION['rol']); ?>); //guuardar la variable en jquery con variables de sesion
@@ -102,13 +119,13 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img  src="dist/img/user2-160x160.jpg" class="user-image userImg" alt="User Image">
                             <span class="hidden-xs usuario">Alexander Pierce</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <img  src="dist/img/user2-160x160.jpg" class="img-circle userImg" alt="User Image">
 
                                 <p class='usuario'>
                                     Nombre del usuario

@@ -153,11 +153,14 @@ function datosEstudiante()
       '<tbody>
     <tr>
         <td>' . $res['ced_usu'] . '</td>
-        <td>' . $res['nom1_usu'] . ' ' . $res['nom2_usu'] . '</td>
-        <td>' . $res['ape1_usu'] . ' ' . $res['ape2_usu'] . '</td>
-        <td>' . $res['mail_usu'] . '</td>
-        <td>' . $res['dir_usu'] . '</td>
+        <td >' . $res['nom1_usu'] . ' ' . $res['nom2_usu'] . '</td>
+        <td >' . $res['ape1_usu'] . ' ' . $res['ape2_usu'] . '</td>
+        <td >' . $res['mail_usu'] . '</td>
+        <td >' . $res['dir_usu'] . '</td>
         <td style="visibility:collapse; display:none;">' . $res['img_usu'] . '</td>     
+        <td >
+        <button id="edit" type="button" class="btn btn-outline-success">Editar</button>
+        </td>     
     </tr>
     </tbody>';
   }
@@ -171,7 +174,9 @@ function fotoUsuario()
   $sentence = $con->prepare($query);
   $sentence->execute(array($_SESSION['cedula']));
   $result = $sentence->fetch();
-  return $result['img_usu'];
+  $img='<img id="picture" src="' . $result['img_usu']. '" class="card-img-top" alt="...">';
+  return $img;
+                        
 }
 
 
