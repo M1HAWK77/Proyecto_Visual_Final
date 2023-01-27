@@ -14,10 +14,12 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
     echo ("existe el usuario " . $_SESSION['user'] . " y se ha definido como " . $_SESSION['rol']);
     if ($_SESSION['rol'] == 'admin') {
       header('location: admin.php');
-    }else if($_SESSION['rol'] == 'estudiante'){
+    } else if ($_SESSION['rol'] == 'estudiante') {
       header('location: estudiantes.php');
-    } else if($_SESSION['rol'] == 'docente') {
+    } else if ($_SESSION['rol'] == 'docente') {
       header('location: docentes.php');
+    } else if ($_SESSION['rol'] == 'invitado') { //agregue al final invitado
+      header('location: invitado.php');
     }
   }
 }
@@ -59,9 +61,9 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
           if (data >= 1 && roleUser == 'admin') {
             alert('entro al if' + roleUser);
             window.open("admin.php");
-          }else if(data >= 1 && roleUser == 'estudiante'){
+          } else if (data >= 1 && roleUser == 'estudiante') {
             window.open("estudiantes.php");
-          }else if(data >= 1 && roleUser == 'docente'){
+          } else if (data >= 1 && roleUser == 'docente') {
             window.open("docentes.php");
           }
         })
@@ -73,6 +75,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
 </head>
 
 <body class="hold-transition login-page">
+
   <div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
@@ -116,6 +119,23 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
     <!-- /.card -->
   </div>
   <!-- /.login-box -->
+  <br>
+
+  <!-- card -->
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title" style="align-items: center;">-------------Bienvenido-------------</h5>
+      <p class="card-text">Para visualizar la interfaz de la plataforma puede ingresar como invitado, para esto simularemos el proceso de logearse</p>
+    </div>
+  </div>
+
+  <div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">usuario: invitado@gmail.com </li>
+    <li class="list-group-item">contraseña: invitado</li>
+  </ul>
+</div>
+  <!-- card -->
 
   <!-- jQuery -->
   <script src="plugins/jquery/jquery.min.js"></script>
