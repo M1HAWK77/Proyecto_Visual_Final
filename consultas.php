@@ -358,3 +358,27 @@ function deberesRecibidos($id)
   return $filas;
 
 }
+function consultarNotasAsignatura($id)
+{
+  $con = conectar();
+  // $query = "SELECT asignaturas.* FROM asignaturas,  detalle_asignaturas WHERE  asignaturas.id_asig=detalle_asignaturas.id_asi_per AND
+  //             detalle_asignaturas.ced_usu_det=?";
+  $query = "SELECT d.calificacion, a.nom_act FROM detalle_actividades d, actividades a WHERE a.id_asig_per=? AND  d.id_usu_act=? ";
+  $sentence = $con->prepare($query);
+  $sentence->execute(array($id, $_SESSION['cedula']));
+  $result = $sentence->fetchAll();
+  $filas= "";
+
+
+  foreach ($result as $res) {
+    $filas .= '
+        <tbody>
+          <tr>
+            <td>' . $res['nom_act'] . '</td>
+            <td>'.$res['calificacion'].'</td>
+          </tr>';
+  }
+
+  return $filas;
+
+}

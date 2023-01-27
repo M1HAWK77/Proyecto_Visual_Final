@@ -228,6 +228,21 @@ if (isset($_POST['opcion']) && $_POST['opcion'] == "foto") {
 
 //Traer imagen
 
+//Aceptar imagen tomada
+
+if (isset($_POST['opcion']) && $_POST['opcion'] == "fotoTimeReal") {
+    
+    $con = conectar();
+    $query = "UPDATE  usuarios SET img_usu=? WHERE ced_usu=?";
+    $ejecutar= $con->prepare($query);
+    $ejecutar->execute(array($_POST['i'],$_SESSION['cedula']));
+    $traer = $ejecutar->fetch();
+    echo $traer['img_usu'];
+    
+}
+
+//Aceptar imagen tomada
+
 
 //salir
 if(isset($_POST['opcion']) && $_POST['opcion']=="salir"){

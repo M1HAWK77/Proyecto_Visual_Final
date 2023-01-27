@@ -5,25 +5,33 @@
 <script>
     $(document).ready(function() {
 
+        //imagen en tiempo real
+        //obtener id de la url para asignar la tareas
+        var urlCursos = $(location).attr('href');
+        var arrayCad = urlCursos.split('=');
+        var valor = arrayCad[1];
+        alert(valor);
+        //imagen en tiempo real
+
         //Cargar Img
         $.ajax({
-                url: "validaciones.php",
-                type: "POST",
-                data: {
-                    opcion: "foto"
-                },
-                success: function(resultado) {
-                    $("#picture").attr("src",resultado);
-                    
-                }
+            url: "validaciones.php",
+            type: "POST",
+            data: {
+                opcion: "foto"
+            },
+            success: function(resultado) {
+                $("#picture").attr("src", resultado);
 
-            });
+            }
+
+        });
 
         //Fin Cargar Img
 
         var usuario_id = "";
         var opcion;
-        var ruta="";
+        var ruta = "";
 
         $("#upload").click(function() {
             $("#modalSubirArchivos").modal("show");
@@ -44,7 +52,7 @@
             $("#apellidoMaterno").val(arraySeparadorCadenaA[1]);
             $("#correo").val(fila.find('td:eq(3)').text());
             $("#direccion").val(fila.find('td:eq(4)').text());
-            ruta=fila.find('td:eq(5)').text();
+            ruta = fila.find('td:eq(5)').text();
             $("#modalCrudEditar").modal('show');
 
         });
@@ -85,17 +93,17 @@
         });
 
 
-        
-        $(".asignaturaSeleccionada").click(function(){
+
+        $(".asignaturaSeleccionada").click(function() {
             fila = $(this).closest("tr"); //captura la fila
             idAsig = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
-            window.open("asignaturaEstudiante.php?id="+idAsig+"", "_self"); //hace que no se abra otra pestaña
+            window.open("asignaturaEstudiante.php?id=" + idAsig + "", "_self"); //hace que no se abra otra pestaña
 
         });
 
 
-            //SUBIR ARCHIVOS
-            $("#Upload").click(function() { //variable cualquiera que coloco
+        //SUBIR ARCHIVOS
+        $("#Upload").click(function() { //variable cualquiera que coloco
             var fd = new FormData();
             var files = $('#file')[0].files[0];
             fd.append('file', files);
@@ -120,8 +128,29 @@
             });
         });
 
+        $("#acceptImg").click(function() {
 
+            if (valor != null) {
 
+                $.ajax({
+                    url: "validaciones.php",
+                    type: "POST",
+                    data: {
+                        i: valor,
+                        opcion: "fotoTimeReal"
+                    },
+                    success: function(resultado) {
+                        location.reload();
+
+                    }
+
+                });
+            } else {
+
+                alert('No se ha tomado ninguna foto');
+            }
+
+        });
 
     });
 </script>
@@ -154,13 +183,14 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <!-- ./col -->
+                <!-- aqui esta lo del div para mostrar la imagen -->
                 <div class="col-lg-3 col-6">
-                    <!-- small box -->
                     <div class="card" style="width: 18rem;">
                         <img id="picture" src="img/usuImg/spidi.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="card-text">Estimado estudiante, en esta seccion podra editar sus datos</p>
-                            <button id="takePicture" type="button" class="btn btn-outline-info">Editar</button>
+                            <a href="tomarFoto.php"><button id="takePicture" type="button" class="btn btn-outline-info">Tomar Foto</button></a>
+                            <button id="acceptImg" type="button" class="btn btn-outline-info">Aceptar Imagen</button>
                         </div>
                     </div>
                 </div>
@@ -216,9 +246,11 @@
             <section class="content">
                 <!-- here  -->
                 <table class="table table-sm table-borderless  ">
-                    <thead >
+                    <thead>
                         <tr>
-                            <th><h2> Asignaturas </h2></th>
+                            <th>
+                                <h2> Asignaturas </h2>
+                            </th>
                         </tr>
                     </thead>
 

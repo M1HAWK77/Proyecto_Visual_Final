@@ -5,19 +5,26 @@
 <script>
     $(document).ready(function() {
 
+         //imagen en tiempo real
+        var urlCursos = $(location).attr('href');
+        var arrayCad = urlCursos.split('=');
+        var valor = arrayCad[1];
+        //imagen en tiempo real
+
+
         //Cargar Img
         $.ajax({
-                    url: "validaciones.php",
-                    type: "POST",
-                    data: {
-                        opcion: "foto"
-                    },
-                    success: function(resultado) {
-                        $("#usuImg").attr("src",resultado);
-                        //alert(resultado);
-                    }
+            url: "validaciones.php",
+            type: "POST",
+            data: {
+                opcion: "foto"
+            },
+            success: function(resultado) {
+                $("#usuImg").attr("src", resultado);
+                //alert(resultado);
+            }
 
-                });
+        });
 
         //Fin Cargar Img    
 
@@ -25,7 +32,7 @@
 
         var usuario_id = "";
         var opcion;
-        var ruta="";
+        var ruta = "";
 
         // puedo acceder a las class de otras clases
         $("#edit").click(function() {
@@ -42,11 +49,11 @@
             $("#apellidoMaterno").val(arraySeparadorCadenaA[1]);
             $("#correo").val(fila.find('td:eq(3)').text());
             $("#direccion").val(fila.find('td:eq(4)').text());
-            ruta=fila.find('td:eq(5)').text();
+            ruta = fila.find('td:eq(5)').text();
             $("#modalCrudEditar").modal('show');
         });
 
-        
+
         $("#upload").click(function() {
             $("#modalSubirArchivos").modal("show");
         });
@@ -87,16 +94,16 @@
         });
 
 
-        $(".asignaturaSeleccionada").click(function(){
+        $(".asignaturaSeleccionada").click(function() {
             fila = $(this).closest("tr"); //captura la fila
             idAsig = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
-            window.open("asignaturaDocente.php?id="+idAsig+"", "_self"); //hace que no se abra otra pestaña
+            window.open("asignaturaDocente.php?id=" + idAsig + "", "_self"); //hace que no se abra otra pestaña
 
         });
 
-        
-            //SUBIR ARCHIVOS
-            $("#Upload").click(function() { //variable cualquiera que coloco
+
+        //SUBIR ARCHIVOS
+        $("#Upload").click(function() { //variable cualquiera que coloco
             var fd = new FormData();
             var files = $('#file')[0].files[0];
             fd.append('file', files);
@@ -121,6 +128,30 @@
             });
         });
 
+
+        $("#acceptImg").click(function() {
+
+            if (valor != null) {
+
+                $.ajax({
+                    url: "validaciones.php",
+                    type: "POST",
+                    data: {
+                        i: valor,
+                        opcion: "fotoTimeReal"
+                    },
+                    success: function(resultado) {
+                        location.reload();
+
+                    }
+
+                });
+            } else {
+
+                alert('No se ha tomado ninguna foto');
+            }
+
+        });
 
     });
 </script>
@@ -159,7 +190,8 @@
                         <img id="usuImg" src="dist/img/user8-128x128.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="card-text"></p>
-                            <button id="takePictureD" type="button" class="btn btn-outline-success">Picture</button>
+                            <a href="tomarFotoDocente.php" ><button id="takePicture" type="button" class="btn btn-outline-info">Tomar Foto</button></a>
+                            <button id="acceptImg" type="button" class="btn btn-outline-info">Aceptar Imagen</button>
                         </div>
                     </div>
                 </div>
@@ -192,16 +224,18 @@
             <section class="content">
                 <!-- here  -->
                 <table class="table table-sm table-borderless">
-                        <thead>
-                            <tr>
-                                <th> <h2> Asignaturas </h2></th>
-                            </tr>
-                        </thead>
+                    <thead>
+                        <tr>
+                            <th>
+                                <h2> Asignaturas </h2>
+                            </th>
+                        </tr>
+                    </thead>
 
-                        <?php
-                        echo listarAsignaturasDocente();
-                        ?>
-                    </table>
+                    <?php
+                    echo listarAsignaturasDocente();
+                    ?>
+                </table>
 
             </section>
 

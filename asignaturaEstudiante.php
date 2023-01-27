@@ -5,6 +5,11 @@
         var ruta="";
         var opcion;
 
+        //recojer valor de la materia a la que pertenece
+        var urlCursos = $(location).attr('href');
+        var arrayCad = urlCursos.split('=');
+        var materia = arrayCad[1];
+
         $(".uploadDeber").click(function() {
             fila = $(this).closest("tr");
             idAsignatura = fila.find('td:eq(0)').text();
@@ -66,6 +71,10 @@
             });
         });
 
+        $("#notasXMateria").click(function(){
+            window.open("notasMateriaEstudiante.php?id=" + materia + "", "_self"); //hace que no se abra otra pestaña
+        });
+
     });
 </script>
 
@@ -93,7 +102,29 @@
     <section class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
+
+            <!-- here -->
             <div class="row">
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>NOTAS</h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a id="notasXMateria" class="small-box-footer">ver <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+            <!-- here -->
+
+
+            <div class="row">
+
+
                 <!-- aqui inicia  -->
                 <div class="card-body">
                     <table class="table table-bordered">
