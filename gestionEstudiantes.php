@@ -106,7 +106,7 @@
 
         //Agregar
         $("#formUsuariosAgregar").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
-            alert('agregar click');
+            //alert('agregar click');
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
             cedula = $("#cedula").val();
             pNombre = $("#primerNombreAdd").val();

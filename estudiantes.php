@@ -10,7 +10,7 @@
         var urlCursos = $(location).attr('href');
         var arrayCad = urlCursos.split('=');
         var valor = arrayCad[1];
-        alert(valor);
+        //alert(valor);
         //imagen en tiempo real
 
         //Cargar Img

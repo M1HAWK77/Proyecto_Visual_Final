@@ -10,7 +10,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
     if ($_SESSION['rol'] == '') {
         header("location:index.php"); //me da problemas y me muestra que la pagina no esta disponible
     } else {
-        echo ("existe el usuario " . $_SESSION['user'] . " y se ha definido como " . $_SESSION['rol'] . ' CabeceraGeneral->' . $_SESSION['cedula']);
+        //echo ("existe el usuario " . $_SESSION['user'] . " y se ha definido como " . $_SESSION['rol'] . ' CabeceraGeneral->' . $_SESSION['cedula']);
         if ($_SESSION['rol'] == 'admin') {
         }
     }
@@ -191,12 +191,6 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
                                         <a href="./docentes.php" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Home</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Materias</p>
                                         </a>
                                     </li>
                                 </ul>

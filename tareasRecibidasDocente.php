@@ -10,7 +10,7 @@
         var valor = arrayCad[1];
         var idActividad;
         var notaActual;
-        alert(valor);
+        //alert(valor);
 
         // puedo acceder a las class de otras clases
         $("#goTareas").click(function() {
@@ -100,7 +100,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">UNIVERSIDAD DE LA VIDA SINCE 2002</h1>
+                    <h1 class="m-0">UNIVERSIDAD TECNICA DE AMBATO</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
