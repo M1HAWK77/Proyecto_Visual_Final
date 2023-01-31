@@ -332,8 +332,8 @@ function deberesRecibidos($id)
 {
   $con = conectar();
   
-  $query = "SELECT d.id_det_act, d.calificacion, d.archivo_act, a.nom_act, u.* FROM detalle_actividades d, actividades a, usuarios u, asignaturas s WHERE s.id_asig = ? AND a.id_asig_per = s.id_asig 
-  AND d.id_act_per = a.id_act AND u.ced_usu = d.id_usu_act";
+  $query = "SELECT d.id_det_act, d.calificacion, d.archivo_act, a.nom_act, u.* FROM detalle_actividades d, actividades a, usuarios u, asignaturas s WHERE s.id_asig = ?
+  AND a.id_asig_per = s.id_asig AND d.id_act_per = a.id_act AND u.ced_usu = d.id_usu_act";
 
   $sentence = $con->prepare($query);
   $sentence->execute(array($id));
@@ -364,7 +364,8 @@ function consultarNotasAsignatura($id)
   $con = conectar();
   // $query = "SELECT asignaturas.* FROM asignaturas,  detalle_asignaturas WHERE  asignaturas.id_asig=detalle_asignaturas.id_asi_per AND
   //             detalle_asignaturas.ced_usu_det=?";
-  $query = "SELECT d.calificacion, a.nom_act FROM detalle_actividades d, actividades a WHERE a.id_asig_per=? AND  d.id_usu_act=? ";
+  //$query = "SELECT d.calificacion, a.nom_act FROM detalle_actividades d, actividades a WHERE a.id_asig_per=? AND  d.id_usu_act=?";
+  $query = "SELECT d.calificacion, a.nom_act FROM detalle_actividades d, actividades a WHERE a.id_asig_per=? AND d.id_usu_act=? AND d.id_act_per = a.id_act";
   $sentence = $con->prepare($query);
   $sentence->execute(array($id, $_SESSION['cedula']));
   $result = $sentence->fetchAll();

@@ -45,7 +45,7 @@
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
                                 </div>
-                                <a href="matriculaEstudiante.php" class="small-box-footer">Back <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="estudiantes.php" class="small-box-footer">Back <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
