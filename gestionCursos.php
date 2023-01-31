@@ -11,8 +11,8 @@
         $(".gestion").click(function() {
             fila = $(this).closest("tr"); //captura la fila
             cursoId = fila.find('td:eq(0)').text(); //que busque la columna con la posicion
-            alert(cursoId);
-            window.open("gestionAsignaturas.php?id="+cursoId+"");
+            //alert(cursoId);
+            window.open("gestionAsignaturas.php?id="+cursoId+"", "_self");
         });
 
 

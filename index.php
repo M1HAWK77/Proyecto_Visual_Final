@@ -57,7 +57,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
           pw: userPw
 
         }, function(data, status) {
-          alert("valor: " + data + " estado: " + status + userMail + userPw);
+          //alert("valor: " + data + " estado: " + status + userMail + userPw);
           if (data >= 1 && roleUser == 'admin') {
             alert('entro al if' + roleUser);
             window.open("admin.php");
