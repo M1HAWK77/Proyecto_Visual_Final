@@ -69,6 +69,11 @@
             direccion = $("#direccion").val();
             opcion = 1;
 
+            if(pNombre.length < 1 || pApellido.length < 1 || correo.length < 1 ){
+                alert("No se admiten los campos primarios como vacios [Primer nombre, Apellido, Correo]");
+                return 0;
+            }
+
             $.ajax({
                 url: "validaciones.php",
                 type: "POST",

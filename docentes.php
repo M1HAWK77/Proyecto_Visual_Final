@@ -5,7 +5,7 @@
 <script>
     $(document).ready(function() {
 
-         //imagen en tiempo real
+        //imagen en tiempo real
         var urlCursos = $(location).attr('href');
         var arrayCad = urlCursos.split('=');
         var valor = arrayCad[1];
@@ -70,6 +70,12 @@
             correo = $("#correo").val();
             direccion = $("#direccion").val();
             opcion = 1;
+
+            if (pNombre.length < 1 || pApellido.length < 1 || correo.length < 1) {
+                alert("No se admiten los campos primarios como vacios [Primer nombre, Apellido, Correo]");
+                return 0;
+            }
+
             $.ajax({
                 url: "validaciones.php",
                 type: "POST",
@@ -190,7 +196,7 @@
                         <img id="usuImg" src="dist/img/user8-128x128.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="card-text"></p>
-                            <a href="tomarFotoDocente.php" ><button id="takePicture" type="button" class="btn btn-outline-info">Tomar Foto</button></a>
+                            <a href="tomarFotoDocente.php"><button id="takePicture" type="button" class="btn btn-outline-info">Tomar Foto</button></a>
                             <button id="acceptImg" type="button" class="btn btn-outline-info">Aceptar Imagen</button>
                         </div>
                     </div>
