@@ -50,6 +50,7 @@
 
         $("#formUsuariosEditar").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
+
             nombreUsuario = $("#nombreUsuario").val();
             pNombre = $("#primerNombre").val();
             sNombre = $("#segundoNombre").val();
@@ -59,6 +60,12 @@
             direccion = $("#direccion").val();
             rutaImg= ruta;
             opcion = 1;
+
+            if(pNombre.length < 1 || pApellido.length < 1 || correo.length < 1 ){
+                alert("No se admiten los campos primarios como vacios [Primer nombre, Apellido, Correo]");
+                return 0;
+            }
+
 
             $.ajax({
                 url: "validaciones.php",
@@ -80,6 +87,8 @@
                 }
 
             });
+
+        //else sentencia
 
         });
 
@@ -118,6 +127,11 @@
             direccion = $("#direccionAdd").val();
             rutaImg= ruta;
             opcion = 3;  
+
+            if(pNombre.length < 1 || pApellido.length < 1 || correo.length < 1 ){
+                alert("No se admiten los campos primarios como vacios [Primer nombre, Apellido, Correo]");
+                return 0;
+            }
 
             // Nueva funcion desde aqui FIN
 

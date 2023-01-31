@@ -50,6 +50,11 @@
             direccion = $("#direccion").val();
             opcion = 1;
 
+            if(pNombre.length < 1 || pApellido.length < 1 || correo.length < 1 ){
+                alert("No se admiten los campos primarios como vacios [Primer nombre, Apellido, Correo]");
+                return 0;
+            }
+
             var arraySeparadorCadena = nombreUsuario.split(" ");
             alert(arraySeparadorCadena);
             $.ajax({
@@ -97,7 +102,7 @@
 
         //Agregar
         $("#formUsuariosAgregar").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
-            alert('agregar click');
+            //alert('agregar click');
             e.preventDefault(); //evita que el formulario mande todo hacia el servidor
             cedula = $("#cedula").val();
             pNombre = $("#primerNombreAdd").val();
@@ -108,6 +113,12 @@
             password = $("#pw").val();
             direccion = $("#direccionAdd").val();
             opcion = 3;
+
+            if(pNombre.length < 1 || pApellido.length < 1 || correo.length < 1 ){
+                alert("No se admiten los campos primarios como vacios [Primer nombre, Apellido, Correo]");
+                return 0;
+            }
+
 
             $.ajax({
                 url: "validaciones.php",

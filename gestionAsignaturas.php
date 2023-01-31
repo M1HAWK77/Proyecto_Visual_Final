@@ -34,13 +34,16 @@
         
         //Agregar
         $("#formAgregarAsignatura").submit(function(e) { //variable cualquiera que coloco, es para controlar el boton submit
-            e.preventDefault(); //evita que el formulario mande todo hacia el servidor
-            idA = $("#idAsignatura").val();//si lo borro se pudre el crud de agregar, pero en realidad no tiene funcionalidad
+            e.preventDefault();                 //evita que el formulario mande todo hacia el servidor
+            idA = $("#idAsignatura").val();     //si lo borro se pudre el crud de agregar, pero en realidad no tiene funcionalidad
             nombreA = $("#nombreAsignatura").val();
-            //select
             docSelect=$("#aSeleccion").val();
             opcion = 7;
-            //alert(idA+ nombreA);
+            
+            if(nombreA.length < 1){
+                alert("No se admite el campo nombre vacio ");
+                return 0;
+            }
             
             $.ajax({
                 url: "validaciones.php",
@@ -69,6 +72,11 @@
             nombreA = $("#eNomAsignatura").val();
             docSelect=$("#eSeleccion").val();
             opcion = 8;
+
+            if(nombreA.length< 1 ){
+                alert("No se admite el campo vacio");
+                return 0;
+            }
 
             $.ajax({
                 url: "validaciones.php",

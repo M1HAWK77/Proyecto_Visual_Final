@@ -175,12 +175,12 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
                       <p>HOME</p>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                     <a href="admin.php" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Otros ej</p>
                     </a>
-                  </li>
+                  </li> -->
                 </ul>
               </li>
 

@@ -48,6 +48,11 @@
             descripcionC = $("#descripcionCurso").val();
             opcion = 4;
 
+            if( idC.length < 1 || nombreC.length < 1){
+                alert("No se admite el nombre y el id del curso vacio");
+                return 0;
+            }
+
             $.ajax({
                 url: "validaciones.php",
                 type: "POST",
@@ -71,6 +76,11 @@
             nombreC = $("#enombreCurso").val();
             descripcionC = $("#edescripcionCurso").val();
             opcion = 6;
+
+            if(nombreC.length < 1){
+                alert("No se admite el nombre del curso vacio");
+                return 0;
+            }
 
             $.ajax({
                 url: "validaciones.php",
