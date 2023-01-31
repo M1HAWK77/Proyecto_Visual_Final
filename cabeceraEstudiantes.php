@@ -60,7 +60,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['rol'])) {
                         opcion: "salir"
 
                     }, function(data, status) {
-                        alert("valor: " + data + " estado: " + status);
+                        //alert("valor: " + data + " estado: " + status);
                         window.location("index.php");
                     })
                     location.reload();
