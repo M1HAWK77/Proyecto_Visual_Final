@@ -54,6 +54,9 @@
         });
 
         $(".Aceptar").click(function(){
+            alert("presiono");
+            //fila = $(this).closest("tr");
+            //idAsignatura = fila.find('td:eq(0)').text();
 
             $.ajax({
                 url: "validaciones.php",
@@ -64,6 +67,7 @@
                     opcion: "upDeberEstudiante"
                 },
                 success: function(resultado) {
+                    alert(data);
                     location.reload();
 
                 }

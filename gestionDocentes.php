@@ -6,6 +6,7 @@
     $(document).ready(function() {
         var usuario_id = "";
         var opcion;
+        var ruta="";
 
         // puedo acceder a las class de otras clases
         $(".editar").click(function() {
@@ -48,6 +49,7 @@
             sApellido = $("#apellidoMaterno").val();
             correo = $("#correo").val();
             direccion = $("#direccion").val();
+            rutaImg= ruta;
             opcion = 1;
 
             if(pNombre.length < 1 || pApellido.length < 1 || correo.length < 1 ){
@@ -68,6 +70,7 @@
                     ape2: sApellido,
                     cor: correo,
                     dir: direccion,
+                    img: ruta,
                     opcion: opcion
                 },
                 success: function(resultado) {
@@ -112,6 +115,7 @@
             correo = $("#correoAdd").val();
             password = $("#pw").val();
             direccion = $("#direccionAdd").val();
+            rutaImg=ruta;
             opcion = 3;
 
             if(pNombre.length < 1 || pApellido.length < 1 || correo.length < 1 ){
@@ -133,6 +137,7 @@
                     pw: password,
                     dir: direccion,
                     tipoUsuario: 'docente',
+                    img: ruta,
                     opcion: opcion
                 },
                 success: function(resultado) {
@@ -143,6 +148,42 @@
             });
 
         });
+
+        $("#upload").click(function() {
+            $("#modalSubirArchivos").modal("show");
+        });
+
+        $("#uploadAgregar").click(function() {
+            $("#modalSubirArchivos").modal("show");
+        });
+
+         //SUBIR ARCHIVOS
+        $("#Upload").click(function() { //variable cualquiera que coloco
+            var fd = new FormData();
+            var files = $('#file')[0].files[0];
+            fd.append('file', files);
+            // AJAX request
+
+            $.ajax({
+                url: 'validarImg.php',
+                type: 'post',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response != 0) {
+                        // Show image preview
+                        alert("Imagen subida: " + response);
+                        $('#imgUsu').text(response);
+                        ruta = response;
+                    } else {
+                        alert('file not uploaded');
+                    }
+                }
+            });
+        });
+
+
 
     });
 </script>
@@ -250,6 +291,8 @@
             <?php include("modalEditar.php"); ?>
             <?php include("modalBorrar.php"); ?>
             <?php include("modalAgregar.php"); ?>
+            <?php include("modalSubirDocumento.php"); ?>
+
 
 
             <!-- FIN TABLE: LATEST ORDERS -->

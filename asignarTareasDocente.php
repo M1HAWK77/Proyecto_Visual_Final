@@ -66,6 +66,7 @@
                     opcion: "upDeber"
                 },
                 success: function(resultado) {
+                    alert(resultado);
                     location.reload();
 
                 }
