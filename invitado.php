@@ -29,12 +29,11 @@
                                     <th>Identificador Curso</th>
                                     <th>Nombre del Curso</th>
                                     <th>Descripción del curso</th>
-                                    <th>Gestión Asignaturas</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <?php include_once('consultas.php');
-                            echo listadoCursos();
+                            echo listadoCursosInvitado();
                             ?>
                         </table>
                     </div>

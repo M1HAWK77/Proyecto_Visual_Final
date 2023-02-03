@@ -94,6 +94,29 @@ function listadoCursos()
   return $filas;
 }
 
+function listadoCursosInvitado(){
+  $con = conectar();
+  $query = "SELECT * FROM cursos";
+  $sentence = $con->prepare($query);
+  $sentence->execute();
+  $result = $sentence->fetchAll();
+
+  $filas = "";
+  foreach ($result as $res) {
+    $filas .= '<tbody>
+    <tr>
+      <td><a href="pages/examples/invoice.php">' . $res['id_cur'] . '</a></td>
+      <td>' . $res['nom_cur'] . '</td>
+      <td><span class="badge badge-success">' . $res['desc_cur'] . '</span></td>
+    </tr>';
+  }
+
+  return $filas;
+
+
+}
+
+
 
 function listadoAsignaturas($id)
 {
