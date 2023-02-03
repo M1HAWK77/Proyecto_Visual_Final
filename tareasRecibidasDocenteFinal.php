@@ -13,10 +13,79 @@
         //alert(valor);
 
         // puedo acceder a las class de otras clases
-        $(".goAsignacion").click(function() {
+        $("#goTareas").click(function() {
+
+            window.open("asignarTareasDocente.php?id="+valor+"", "_self");
+        });
+
+        $(".calificar").click(function(){
             fila = $(this).closest("tr"); 
             idActividad= fila.find('td:eq(0)').text(); 
-            window.open("tareasRecibidasDocenteFinal.php?id="+idActividad+"", "_self");
+            $("#modalCalificar").modal('show');
+
+        });
+
+        $(".editar").click(function(){
+            fila = $(this).closest("tr"); 
+            idActividad= fila.find('td:eq(0)').text();
+            notaActual=fila.find('td:eq(5)')
+            $("#modalCalificarE").modal('show');
+
+        });
+
+         //Agregar Calificacion
+        $("#formCalificacion").submit(function(e) { 
+            e.preventDefault(); 
+            nota = $("#upNota").val();
+            //alert(idA+ nombreA);
+            if(nota >= 0 && nota <= 10){
+            
+                $.ajax({
+                    url: "validaciones.php",
+                    type: "POST",
+                    data: {
+                        idDeber: idActividad,
+                        calf: nota,
+                        opcion: "calificacion"
+                    },
+                    success: function(resultado) {
+                        //aler(resultado);
+                        location.reload();
+                        
+                    }
+                    
+                });
+            }else{
+                alert("la nota que se quiere ingresar no es valida")
+            }
+            
+        });
+
+         //Editar Calificacion
+        $("#formCalificacionE").submit(function(e) { 
+            e.preventDefault(); 
+            nota = $("#upNotaE").val();
+            if(nota >= 0 && nota <= 10){
+            
+                $.ajax({
+                    url: "validaciones.php",
+                    type: "POST",
+                    data: {
+                        idDeber: idActividad,
+                        calf: nota,
+                        opcion: "editarcalificacion"
+                    },
+                    success: function(resultado) {
+                        //aler(resultado);
+                        location.reload();
+                        
+                    }
+                    
+                });
+            }else{
+                alert("la nota que se quiere ingresar no es valida")
+            }
+            
         });
 
     });
@@ -62,15 +131,22 @@
                     </div>
                 </div>
 
-                <!-- nuevo -->
+                <!-- ///////////////antiguo//////////////// -->
+                <!-- /.card-header -->
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table m-0">
                             <thead>
                                 <tr>
                                     <th style="visibility:collapse; display:none;">id_act_per</th>
-                                    <th>Asignación</th>
-                                    <th>--</th>
+                                    <th>Asignacion</th>
+                                    <th>Nombre Estudiante</th>
+                                    <th>ID</th>
+                                    <th>Descargar tarea</th>
+                                    <th>Calificación</th>
+                                    <th>Calificar</th>
+                                    <th>Editar calificacion</th>
+
                                 </tr>
                             </thead>
                             <?php include_once('consultas.php');
@@ -78,14 +154,16 @@
                             $url = $_SERVER["REQUEST_URI"];
                             $string = strval($url);
                             $id = explode("=", $string);
-                            echo deberesEnviadosMateria($id[1]);
+                            echo deberesRecibidos($id[1]);
                             ?>
                         </table>
-                    </div>
+                    </div> 
                     <!-- /.table-responsive -->
                 </div>
                 <!-- /.card-footer -->
             </div>
+
+            <!-- ///////////////antiguo//////////////// -->
 
             <?php include("modalCalificar.php")?>           
             <?php include("modalEditarCalificacion.php")?>           

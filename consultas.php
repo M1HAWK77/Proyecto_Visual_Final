@@ -124,7 +124,7 @@ function listadoAsignaturas($id)
 
 function comboBoxDocentes()
 {
-  
+
   $con = conectar();
   $query = "SELECT * FROM usuarios WHERE tipo_usu='docente'";
   $sentence = $con->prepare($query);
@@ -132,7 +132,7 @@ function comboBoxDocentes()
   $result = $sentence->fetchAll();
   $selectB = "";
   foreach ($result as $res) {
-    $selectB.= '<option selected value='.$res['ced_usu'].'>'.$res['nom1_usu'].' '.$res['ape1_usu'].'</option>';
+    $selectB .= '<option selected value=' . $res['ced_usu'] . '>' . $res['nom1_usu'] . ' ' . $res['ape1_usu'] . '</option>';
   }
   return $selectB;
 }
@@ -174,25 +174,24 @@ function fotoUsuario()
   $sentence = $con->prepare($query);
   $sentence->execute(array($_SESSION['cedula']));
   $result = $sentence->fetch();
-  $img='<img id="picture" src="' . $result['img_usu']. '" class="card-img-top" alt="...">';
+  $img = '<img id="picture" src="' . $result['img_usu'] . '" class="card-img-top" alt="...">';
   return $img;
-                        
 }
 
 
 function asignaturasEstudianteNoMatriculado()
 {
   $con = conectar();
-  $query = "SELECT * FROM asignaturas"; 
+  $query = "SELECT * FROM asignaturas";
   $sentence = $con->prepare($query);
   $sentence->execute();
   $result = $sentence->fetchAll();
 
-  $filas="";
+  $filas = "";
 
-  foreach($result as $res){
+  foreach ($result as $res) {
     $filas .=
-    '<tbody> 
+      '<tbody> 
     <tr>
       <td>' . $res['id_asig'] . '</td>
       <td>' . $res['nom_asig'] . '</td>
@@ -201,7 +200,7 @@ function asignaturasEstudianteNoMatriculado()
       </td>
 
     <tr>
-    </tbody>' ;
+    </tbody>';
   }
 
   return $filas;
@@ -225,53 +224,53 @@ function listarAsignaturasEstudiante()
   $result = $sentence->fetchAll();
 
   //return $result;
-  $filas= "";
+  $filas = "";
 
   foreach ($result as $res) {
     $filas .=
-    '<tbody>
+      '<tbody>
   <tr>
-    <td style="visibility:collapse; display:none;">'.$res['id_asig'].'</td>
+    <td style="visibility:collapse; display:none;">' . $res['id_asig'] . '</td>
     <td> 
     <div class="">
-    <button type="button" class="btn btn-block btn-outline-primary asignaturaSeleccionada"><i class="fas fa-pencil-alt"></i> ' .$res['nom_asig']. ' </button>
+    <button type="button" class="btn btn-block btn-outline-primary asignaturaSeleccionada"><i class="fas fa-pencil-alt"></i> ' . $res['nom_asig'] . ' </button>
     </div>
 
     </td>
   </tr>
   </tbody>';
-}
-return $filas;      
+  }
+  return $filas;
 }
 
 
 function listarAsignaturasDocente()
 {
 
-    $con = conectar();
-    $query = "SELECT * FROM asignaturas WHERE docente_asi=?";
-    $sentence = $con->prepare($query);
-    $sentence->execute(array($_SESSION['cedula']));
-    $result = $sentence->fetchAll();
-    $filas= "";
+  $con = conectar();
+  $query = "SELECT * FROM asignaturas WHERE docente_asi=?";
+  $sentence = $con->prepare($query);
+  $sentence->execute(array($_SESSION['cedula']));
+  $result = $sentence->fetchAll();
+  $filas = "";
 
-    foreach ($result as $res) {
-      $filas .=
-        '<tbody>
+  foreach ($result as $res) {
+    $filas .=
+      '<tbody>
       <tr>
-        <td style="visibility:collapse; display:none;">'.$res['id_asig'].'</td>
+        <td style="visibility:collapse; display:none;">' . $res['id_asig'] . '</td>
 
         <td> 
         <div class="">
-        <button type="button" class="btn btn-block btn-outline-primary asignaturaSeleccionada"><i class="fas fa-pencil-alt"></i> ' .$res['nom_asig']. ' </button>
+        <button type="button" class="btn btn-block btn-outline-primary asignaturaSeleccionada"><i class="fas fa-pencil-alt"></i> ' . $res['nom_asig'] . ' </button>
         </div>
     
         </td>
 
       </tr>
       </tbody>';
-    }
-  return $filas;      
+  }
+  return $filas;
 }
 
 function listarEstudiantesPertencenAsignatura($id)
@@ -282,7 +281,7 @@ function listarEstudiantesPertencenAsignatura($id)
   // $sentence->execute(array($_SESSION['cedula']));
   $sentence->execute(array($id));
   $result = $sentence->fetchAll();
-  $filas= "";
+  $filas = "";
 
   foreach ($result as $res) {
     $filas .= '
@@ -307,7 +306,7 @@ function listarTareas($id)
   $sentence = $con->prepare($query);
   $sentence->execute(array($id));
   $result = $sentence->fetchAll();
-  $filas= "";
+  $filas = "";
 
   foreach ($result as $res) {
     $filas .= '
@@ -318,7 +317,7 @@ function listarTareas($id)
             <td><span class="badge">' . $res['desc_act'] . '</span></td>
             <td><span class="badge badge-success">' . $res['fec_entrega_act'] . '</span></td>
             <td><span class="badge badge-success">' . $res['estado_act'] . '</span></td>
-            <td><a class="btn btn-sm btn-warning" href="'.$res['instruccion_act'].'" download> Descargar Actividad! </td>
+            <td><a class="btn btn-sm btn-warning" href="' . $res['instruccion_act'] . '" download> Descargar Actividad! </td>
             <td><a href="#" class="btn btn-sm btn-info float-left uploadDeber">Subir Actividad</a>
               <a href="#" class="btn btn-sm btn-danger float-left Aceptar"> Aceptar</a>
             </td>
@@ -328,17 +327,49 @@ function listarTareas($id)
   return $filas;
 }
 
-function deberesRecibidos($id)
+//Nueva funcion Agregada tareasRecibidasDocente ---------------------------
+function deberesEnviadosMateria($id)
 {
   $con = conectar();
-  
-  $query = "SELECT d.id_det_act, d.calificacion, d.archivo_act, a.nom_act, u.* FROM detalle_actividades d, actividades a, usuarios u, asignaturas s WHERE s.id_asig = ?
-  AND a.id_asig_per = s.id_asig AND d.id_act_per = a.id_act AND u.ced_usu = d.id_usu_act";
+
+  $query = "SELECT id_act, nom_act FROM actividades Where id_asig_per=?;";
 
   $sentence = $con->prepare($query);
   $sentence->execute(array($id));
   $result = $sentence->fetchAll();
-  $filas= "";
+  $filas = "";
+
+  foreach ($result as $res) {
+    $filas .= '
+        <tbody>
+          <tr>
+            <td style="visibility:collapse; display:none;"><a href="#">' . $res['id_act'] . '</a></td>
+            <td>' . $res['nom_act'] . '</td>
+            <td><a href="#" class="btn btn-sm btn-info float-left goAsignacion">Ir a la asignación</a></td>
+            </tr>';
+  }
+
+  return $filas;
+
+}
+
+//Fin Nueva funcion Agregada tareasRecibidasDocente ---------------------------
+
+
+//Funcion original de tareasRecibidasDocente
+
+function deberesRecibidos($id)
+{
+  $con = conectar();
+
+  // $query = "SELECT d.id_det_act, d.calificacion, d.archivo_act, a.nom_act, u.* FROM detalle_actividades d, actividades a, usuarios u, asignaturas s WHERE s.id_asig = ?
+  // AND a.id_asig_per = s.id_asig AND d.id_act_per = a.id_act AND u.ced_usu = d.id_usu_act";
+
+  $query = "SELECT d.id_det_act, d.calificacion, d.archivo_act, a.nom_act, u.* FROM detalle_actividades d, actividades a, usuarios u WHERE  a.id_act=d.id_act_per AND d.id_act_per=? AND u.ced_usu = d.id_usu_act";
+  $sentence = $con->prepare($query);
+  $sentence->execute(array($id));
+  $result = $sentence->fetchAll();
+  $filas = "";
 
 
   foreach ($result as $res) {
@@ -349,16 +380,18 @@ function deberesRecibidos($id)
             <td>' . $res['nom_act'] . '</td>
             <td><span class="badge">'  . $res['nom1_usu'] . ' ' . $res['nom2_usu'] . ' ' . $res['ape1_usu'] . ' ' . $res['ape2_usu'] . '</span></td>
             <td><span class="badge badge-success">' . $res['id_det_act'] . '</span></td>
-            <td><a class="btn btn-sm btn-warning" href="'.$res['archivo_act'].'" download> Descargar! </td>
-            <td>'.$res['calificacion'].'</td>
+            <td><a class="btn btn-sm btn-warning" href="' . $res['archivo_act'] . '" download> Descargar! </td>
+            <td>' . $res['calificacion'] . '</td>
             <td><a href="#" class="btn btn-sm btn-info float-left calificar">Calificar</a></td>
             <td> <a href="#" class="btn btn-sm btn-danger float-left editar"> Editar Nota</a></td>
-          </tr>';
+            </tr>';
   }
 
   return $filas;
-
 }
+//Funcion original de tareasRecibidasDocente
+
+
 function consultarNotasAsignatura($id)
 {
   $con = conectar();
@@ -369,7 +402,7 @@ function consultarNotasAsignatura($id)
   $sentence = $con->prepare($query);
   $sentence->execute(array($id, $_SESSION['cedula']));
   $result = $sentence->fetchAll();
-  $filas= "";
+  $filas = "";
 
 
   foreach ($result as $res) {
@@ -377,10 +410,9 @@ function consultarNotasAsignatura($id)
         <tbody>
           <tr>
             <td>' . $res['nom_act'] . '</td>
-            <td>'.$res['calificacion'].'</td>
+            <td>' . $res['calificacion'] . '</td>
           </tr>';
   }
 
   return $filas;
-
 }
